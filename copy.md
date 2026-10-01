@@ -175,7 +175,8 @@ Notas para quem aplica o texto:
 - **Erro no WhatsApp:** Confira o número: DDD + celular.
 - **Erro no e-mail:** Esse e-mail parece incompleto. Pode conferir?
 - **Erro na confirmação:** Marque a confirmação pra gerar o PDF.
-- **Resumo ao tentar avançar:** Faltam {n} respostas obrigatórias nesta etapa.
+- **Resumo ao tentar avançar (n ≥ 2):** Faltam {n} respostas obrigatórias nesta etapa.
+- **Resumo ao tentar avançar (n = 1):** Falta 1 resposta obrigatória nesta etapa.
 - **Rascunho salvo:** Rascunho salvo neste navegador · {hh:mm}
 - **Rascunho recuperado:** Suas respostas de antes estão aqui. Continue de onde parou.
 - **Sem rascunho disponível:** Este navegador não está guardando rascunho. Termine numa vez só ou baixe o PDF antes de sair.
