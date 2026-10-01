@@ -13,14 +13,14 @@
 <!-- mesmo valor de --ink-950 (css/tokens.css); meta não lê variável CSS -->
 <meta name="theme-color" content="#050B0B">
 
-<!-- Open Graph. og:image relativa até o endereço final .vercel.app ser
-     definido; aí ela, og:url e o resto viram URL absoluta (regra 9) -->
+<!-- Open Graph. og:image e og:url em URL absoluta no endereço de produção (regra 9) -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://zyphy-questionario.vercel.app/">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Zyphy">
 <meta property="og:title" content="Questionário do seu site · Zyphy">
 <meta property="og:description" content="Seis etapas sobre o seu negócio. No fim, um PDF pra enviar a quem vai programar o seu site.">
-<meta property="og:image" content="/assets/og-questionario.png">
+<meta property="og:image" content="https://zyphy-questionario.vercel.app/assets/og-questionario.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Placa verde-petróleo com o Z da Zyphy e o título: Conta pra gente sobre o seu negócio. Quem lê é quem vai programar o seu site.">
