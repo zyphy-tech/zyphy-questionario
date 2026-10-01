@@ -7,6 +7,9 @@
 <meta name="description" content="Seis etapas sobre o seu negócio. No fim, você baixa o PDF e envia pra Zyphy pelo WhatsApp.">
 <!-- fora do Google: o questionário é enviado por link (brief §3). O vercel.json repete em X-Robots-Tag -->
 <meta name="robots" content="noindex, nofollow">
+<!-- canonical no endereço de produção, o mesmo do og:url (regra 9). Aponta
+     para a própria página: não contradiz o noindex acima -->
+<link rel="canonical" href="https://zyphy-questionario.vercel.app/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -54,8 +57,9 @@
     </nav>
 
     <!-- ---------- Placa (coluna da esquerda) ---------- -->
+    <!-- .plate-body é o cabeçalho do questionário: marca, H1 e apresentação -->
     <div class="plate">
-      <div class="plate-body">
+      <header class="plate-body">
         <p class="brand zy-logo" translate="no"><span class="zy-logo-z">Z</span>yphy</p>
         <h1 class="plate-h1"><span class="line">Conta pra gente sobre o seu negócio.</span> <span class="line">Quem lê é quem vai programar o seu site.</span></h1>
         <p class="plate-lead">Seis etapas sobre o seu negócio. No fim, o PDF é seu.</p>
@@ -65,7 +69,7 @@
         <p class="plate-note">28 perguntas em 6 etapas. Dá pra parar e continuar depois, neste mesmo aparelho: o rascunho fica salvo no seu navegador.</p>
         <p class="plate-note plate-note--privacy">Suas respostas não saem deste navegador: o rascunho fica salvo aqui, a página não tem analytics, e o PDF só chega na Zyphy se você enviar.</p>
         <p class="plate-note"><a class="plate-link" href="https://www.zyphy.com.br/privacidade/" target="_blank" rel="noopener">Política de privacidade da Zyphy<span class="sr-only"> (abre em nova aba)</span></a></p>
-      </div>
+      </header>
       <div class="progress" id="progress">
         <p class="progress-step" id="progress-step">Etapa <span data-fill="step-n">1</span> de 6 · <span data-fill="step-name">Seu negócio</span></p>
         <p class="progress-count"><span data-fill="req-done">0</span> de <span data-fill="req-total">11</span> obrigatórias respondidas</p>
