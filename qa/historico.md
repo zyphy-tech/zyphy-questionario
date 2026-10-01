@@ -36,3 +36,13 @@ as entradas já gravadas: elas registram o que foi medido em cada commit.
 - **Bloqueios:** R4, IMP (ai-color-palette)
 - **Correções aplicadas:** 0/7 — volta só de registro (só bloqueios humanos; sem correção)
 - **Precisa de humano:** os mesmos da volta 1 (R4, IMP ai-color-palette, QA-13, IMP all-caps-body, C2, C4) e A2 (aviso de privacidade na primeira tela do celular; mexe na ordem aprovada da placa)
+
+## Volta 1 — 2026-10-01 (ciclo 2)
+
+- **Commit medido:** d4859b7
+- **Modo:** rapido
+- **URL medida:** http://127.0.0.1:65449/
+- **Nota:** 84,2/100 (medido 49,65/60, julgado 34,55/40) · aprovado sim
+- **Bloqueios:** nenhum
+- **Correções aplicadas:** 0/0 — aprovado no rápido, sem correção
+- **Precisa de humano:** QA-13 (brief: fica como está; a correção do review contraria o brief); IMP cramped-padding (prioridade 2, não aplicada: aprovado)
