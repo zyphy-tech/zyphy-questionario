@@ -28,5 +28,5 @@ HTML/CSS/JS vanilla. Biblioteca de PDF hospedada no próprio site (sem CDN de te
 - Aprovadas as interpretações da direção: progresso conta só as 11 obrigatórias (a caixa de confirmação fica fora); a pessoa pode pular para qualquer etapa pelo topo; sem autofocus ao carregar; link da política abre em nova aba.
 - Direção (direcao.md) aprovada pelo Weslley.
 - Exceções IMP no qa/config.json (2026-10-01): ai-color-palette ("ciano é a identidade herdada do zyphy-site, brief §3") e all-caps-body ("H1 em caixa alta da direção aprovada"). Domínio no qa/config.json: https://zyphy-questionario.vercel.app.
-- Ordem no celular (2026-10-01): etapas → H1 e subtítulo → perguntas → resto da placa (privacidade, tamanho) depois das perguntas. Desktop não muda. Motivo: C2, a primeira pergunta aparecia em y=1210 no celular.
+- Ordem no celular e no tablet (2026-10-01; vale para toda largura em que a página fica em uma coluna): etapas → H1 e subtítulo → perguntas → resto da placa (privacidade, tamanho) depois das perguntas. Nessas larguras, o aviso de privacidade vem depois da primeira etapa de perguntas. Desktop não muda. Motivo: C2, a primeira pergunta aparecia em y=1210 no celular.
 - Placa sem prova (C4, 2026-10-01): a placa não traz projetos nem depoimentos.
