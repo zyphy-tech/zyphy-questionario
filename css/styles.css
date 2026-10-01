@@ -21,7 +21,9 @@ p{max-width:var(--measure)}
 
 /* ---------- Página e cartão ---------- */
 .page{display:block;padding-top:var(--space-8)}
-.card{box-sizing:border-box;width:min(var(--card-max),100% - 2 * var(--gutter));margin-inline:auto;background:var(--surface);border-radius:var(--r-screen);display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"steps" "progress" "plate" "sheet"}
+/* celular e tablet: a ordem do markup (etapas → progresso → cabeçalho da
+   placa → perguntas → fim da placa) é a ordem da tela */
+.card{box-sizing:border-box;width:min(var(--card-max),100% - 2 * var(--gutter));margin-inline:auto;background:var(--surface);border-radius:var(--r-screen);display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"steps" "progress" "plate-head" "sheet" "plate-end"}
 
 /* ---------- Etapas no topo ---------- */
 .steps{--steps-pad:var(--card-pad);--steps-gap:var(--space-3);grid-area:steps;position:relative;padding:var(--space-5) var(--steps-pad) 0;border-bottom:var(--hairline) solid var(--line)}
@@ -40,16 +42,18 @@ p{max-width:var(--measure)}
 .steps.is-ready .steps-indicator{transition:transform var(--dur-step) var(--ease-out)}
 @media (prefers-reduced-motion:reduce){ .steps.is-ready .steps-indicator{transition:none} }
 
-/* ---------- Placa (coluna da esquerda) ---------- */
-.plate{display:contents}
-.plate-body{grid-area:plate;container-type:inline-size;background:var(--plate);color:var(--text-on-plate);padding:var(--card-pad)}
+/* ---------- Placa: cabeçalho e fim (coluna da esquerda no desktop) ---------- */
+/* o H1 mede pela largura do cabeçalho (13cqi) */
+.plate-head{grid-area:plate-head;container-type:inline-size;background:var(--plate);color:var(--text-on-plate);padding:var(--card-pad)}
+/* tablet: última faixa dentro do cartão, leva o raio dos dois cantos de baixo */
+.plate-end{grid-area:plate-end;background:var(--plate);color:var(--text-on-plate);padding:var(--card-pad);border-radius:var(--r-none) var(--r-none) var(--r-screen) var(--r-screen)}
+.plate-end > :first-child{margin-top:0}
 .brand{margin:0;font-weight:var(--weight-display);font-size:var(--fs-lead);line-height:var(--lh-heading)}
 .zy-logo-z{color:var(--accent)}
 .plate-h1{margin:var(--space-6) 0 0;font-family:var(--font-display);font-weight:var(--weight-display);font-size:var(--fs-h1);line-height:var(--lh-h1);letter-spacing:var(--tracking-display);text-transform:var(--case-display)}
 .plate-h1 .line{display:block;text-wrap:balance}
 .plate-lead{margin:var(--space-5) 0 0;font-size:var(--fs-lead);line-height:var(--lh-lead);text-wrap:pretty}
 .plate-text{margin:var(--space-4) 0 0;text-wrap:pretty}
-.plate-lead + .plate-text{margin-top:var(--space-6)}
 .plate-rule{margin:var(--space-6) 0;border:0;border-top:var(--hairline) solid var(--line)}
 .plate-note{margin:var(--space-3) 0 0;font-size:var(--fs-small);line-height:var(--lh-small);text-wrap:pretty}
 .plate-rule + .plate-note{margin-top:0}
@@ -177,7 +181,9 @@ p{max-width:var(--measure)}
   .step{justify-content:center;padding-top:var(--space-3)}
   .step-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .progress{padding-inline:var(--gutter);background:var(--page)}
-  .plate-body{padding:var(--space-7) var(--gutter)}
+  /* cabeçalho mais curto (32px): é a folga que põe o P1 na primeira tela */
+  .plate-head{padding:var(--space-6) var(--gutter)}
+  .plate-end{padding:var(--space-7) var(--gutter);border-radius:var(--r-none)}
   .sheet{background:var(--surface);padding:var(--space-7) var(--gutter)}
   .btn-row{flex-direction:column;align-items:stretch}
   .btn{width:100%}
@@ -198,10 +204,14 @@ p{max-width:var(--measure)}
 
 /* ---------- Desktop (≥ 1100px): etapas no topo, placa 5/12 + perguntas 7/12 ---------- */
 @media (min-width:1100px){
-  .card{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:"steps steps" "plate sheet"}
-  /* a placa vira coluna própria; o cartão não usa overflow:hidden, senão o
-     sticky do progresso para de funcionar */
-  .plate{grid-area:plate;display:flex;flex-direction:column;background:var(--plate);color:var(--text-on-plate);border-bottom-left-radius:var(--r-screen)}
-  .plate-body{padding-bottom:0}
-  .progress{position:sticky;top:var(--sticky-top);margin:var(--space-6) var(--card-pad) var(--card-pad);padding:var(--space-5) 0 0;background:var(--plate);border-bottom:0;border-top:var(--hairline) solid var(--line)}
+  /* coluna da esquerda: cabeçalho → fim da placa → progresso. A última
+     linha (1fr) cresce até a altura das perguntas; o progresso grudado anda
+     dentro dela. O cartão não usa overflow:hidden, senão o sticky para */
+  .card{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"steps steps" "plate-head sheet" "plate-end sheet" "progress sheet"}
+  /* o petróleo da coluna inteira, numa superfície só: as três partes ficam
+     por cima, sem emenda entre elas */
+  .card::before{content:"";grid-column:1;grid-row:2 / -1;background:var(--plate);border-bottom-left-radius:var(--r-screen)}
+  .plate-head{padding-bottom:0}
+  .plate-end{padding:var(--space-6) var(--card-pad) 0;border-radius:var(--r-none)}
+  .progress{align-self:start;position:sticky;top:var(--sticky-top);margin:var(--space-6) var(--card-pad) var(--card-pad);padding:var(--space-5) 0 0;background:var(--plate);color:var(--text-on-plate);border-bottom:0;border-top:var(--hairline) solid var(--line)}
 }

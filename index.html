@@ -56,26 +56,24 @@
       <span class="steps-indicator" aria-hidden="true"></span>
     </nav>
 
-    <!-- ---------- Placa (coluna da esquerda) ---------- -->
-    <!-- .plate-body é o cabeçalho do questionário: marca, H1 e apresentação -->
-    <div class="plate">
-      <header class="plate-body">
-        <p class="brand zy-logo" translate="no"><span class="zy-logo-z">Z</span>yphy</p>
-        <h1 class="plate-h1"><span class="line">Conta pra gente sobre o seu negócio.</span> <span class="line">Quem lê é quem vai programar o seu site.</span></h1>
-        <p class="plate-lead">Seis etapas sobre o seu negócio. No fim, o PDF é seu.</p>
-        <p class="plate-text">A Zyphy faz sites, apps e dashboards. O que você responder aqui é a base do texto do seu site.</p>
-        <p class="plate-text">Quem conversa com você é quem programa o projeto.</p>
-        <hr class="plate-rule">
-        <p class="plate-note">28 perguntas em 6 etapas. Dá pra parar e continuar depois, neste mesmo aparelho: o rascunho fica salvo no seu navegador.</p>
-        <p class="plate-note plate-note--privacy">Suas respostas não saem deste navegador: o rascunho fica salvo aqui, a página não tem analytics, e o PDF só chega na Zyphy se você enviar.</p>
-        <p class="plate-note"><a class="plate-link" href="https://www.zyphy.com.br/privacidade/" target="_blank" rel="noopener">Política de privacidade da Zyphy<span class="sr-only"> (abre em nova aba)</span></a></p>
-      </header>
-      <div class="progress" id="progress">
-        <p class="progress-step" id="progress-step">Etapa <span data-fill="step-n">1</span> de 6 · <span data-fill="step-name">Seu negócio</span></p>
-        <p class="progress-count"><span data-fill="req-done">0</span> de <span data-fill="req-total">11</span> obrigatórias respondidas</p>
-        <p class="progress-draft" id="progress-draft" hidden>Rascunho salvo neste navegador · <span data-fill="draft-time"></span></p>
-      </div>
+    <!-- ---------- Progresso ---------- -->
+    <!-- legenda das etapas no celular e no tablet, logo abaixo delas; no
+         desktop, último item da coluna da placa, grudado no topo -->
+    <div class="progress" id="progress">
+      <p class="progress-step" id="progress-step">Etapa <span data-fill="step-n">1</span> de 6 · <span data-fill="step-name">Seu negócio</span></p>
+      <p class="progress-count"><span data-fill="req-done">0</span> de <span data-fill="req-total">11</span> obrigatórias respondidas</p>
+      <p class="progress-draft" id="progress-draft" hidden>Rascunho salvo neste navegador · <span data-fill="draft-time"></span></p>
     </div>
+
+    <!-- ---------- Placa, parte 1: cabeçalho (marca, H1, subtítulo) ----------
+         A placa são duas partes no markup, na ordem da tela do celular:
+         cabeçalho → perguntas → fim da placa (direcao.md › Layout › Celular,
+         decisão 7). No desktop o grid junta as duas na coluna da esquerda -->
+    <header class="plate-head">
+      <p class="brand zy-logo" translate="no"><span class="zy-logo-z">Z</span>yphy</p>
+      <h1 class="plate-h1"><span class="line">Conta pra gente sobre o seu negócio.</span> <span class="line">Quem lê é quem vai programar o seu site.</span></h1>
+      <p class="plate-lead">Seis etapas sobre o seu negócio. No fim, o PDF é seu.</p>
+    </header>
 
     <!-- ---------- Perguntas (coluna da direita) ---------- -->
     <div class="sheet">
@@ -412,6 +410,16 @@
           <p class="final-edit"><button type="button" class="link-btn" data-action="edit">Voltar e editar respostas</button></p>
         </section>
       </section>
+    </div>
+
+    <!-- ---------- Placa, parte 2: fim (depois dos botões da etapa e da prévia) ---------- -->
+    <div class="plate-end">
+      <p class="plate-text">A Zyphy faz sites, apps e dashboards. O que você responder aqui é a base do texto do seu site.</p>
+      <p class="plate-text">Quem conversa com você é quem programa o projeto.</p>
+      <hr class="plate-rule">
+      <p class="plate-note">28 perguntas em 6 etapas. Dá pra parar e continuar depois, neste mesmo aparelho: o rascunho fica salvo no seu navegador.</p>
+      <p class="plate-note plate-note--privacy">Suas respostas não saem deste navegador: o rascunho fica salvo aqui, a página não tem analytics, e o PDF só chega na Zyphy se você enviar.</p>
+      <p class="plate-note"><a class="plate-link" href="https://www.zyphy.com.br/privacidade/" target="_blank" rel="noopener">Política de privacidade da Zyphy<span class="sr-only"> (abre em nova aba)</span></a></p>
     </div>
   </div>
 </main>
