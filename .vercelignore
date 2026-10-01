@@ -1,0 +1,12 @@
+# Lista branca: ignora tudo e libera só o que a página carrega (regra 9).
+# Conferido contra index.html, css/, js/ (inclusive o que o js/pdf.js busca
+# no clique) em 2026-10-01. Arquivo novo que a página passe a usar precisa
+# entrar aqui.
+/*
+!/index.html
+!/favicon.ico
+!/vercel.json
+!/css
+!/js
+!/assets
+!/vendor

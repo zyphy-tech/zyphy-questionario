@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionário do site · Zyphy</title>
+<meta name="description" content="Seis etapas sobre o seu negócio. No fim, você baixa o PDF e envia pra Zyphy pelo WhatsApp.">
+<!-- fora do Google: o questionário é enviado por link (brief §3). O vercel.json repete em X-Robots-Tag -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- mesmo valor de --ink-950 (css/tokens.css); meta não lê variável CSS -->
+<meta name="theme-color" content="#050B0B">
+
+<!-- Open Graph. og:image relativa até o endereço final .vercel.app ser
+     definido; aí ela, og:url e o resto viram URL absoluta (regra 9) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Zyphy">
+<meta property="og:title" content="Questionário do seu site · Zyphy">
+<meta property="og:description" content="Seis etapas sobre o seu negócio. No fim, um PDF pra enviar a quem vai programar o seu site.">
+<meta property="og:image" content="/assets/og-questionario.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Placa verde-petróleo com o Z da Zyphy e o título: Conta pra gente sobre o seu negócio. Quem lê é quem vai programar o seu site.">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- o H1 é o maior texto da primeira tela: a display chega antes do primeiro paint possível -->
+<link rel="preload" href="assets/fonts/sofia-sans-extra-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/styles.css">
+<!-- sem defer: pede a fonte de reserva do H1 antes do primeiro paint (ver js/boot.js) -->
+<script src="js/boot.js"></script>
+<script src="js/app.js" defer></script>
+</head>
+<body>
+<main class="page">
+  <div class="card" id="topo">
+
+    <!-- ---------- Etapas ---------- -->
+    <nav class="steps" aria-label="Etapas do questionário">
+      <ol class="steps-list" role="list">
+        <li><button type="button" class="step" data-step="1" aria-current="step"><span class="step-num">1</span> <span class="step-label">Seu negócio</span><span class="sr-only step-state">, agora</span></button></li>
+        <li><button type="button" class="step" data-step="2"><span class="step-num">2</span> <span class="step-label">Quem visita</span><span class="sr-only step-state"></span></button></li>
+        <li><button type="button" class="step" data-step="3"><span class="step-num">3</span> <span class="step-label">Provas</span><span class="sr-only step-state"></span></button></li>
+        <li><button type="button" class="step" data-step="4"><span class="step-num">4</span> <span class="step-label">Contato</span><span class="sr-only step-state"></span></button></li>
+        <li><button type="button" class="step" data-step="5"><span class="step-num">5</span> <span class="step-label">Gosto e marca</span><span class="sr-only step-state"></span></button></li>
+        <li><button type="button" class="step" data-step="6"><span class="step-num">6</span> <span class="step-label">Parte técnica</span><span class="sr-only step-state"></span></button></li>
+      </ol>
+      <!-- o único movimento da página: desliza da etapa anterior para a nova -->
+      <span class="steps-indicator" aria-hidden="true"></span>
+    </nav>
+
+    <!-- ---------- Placa (coluna da esquerda) ---------- -->
+    <div class="plate">
+      <div class="plate-body">
+        <p class="brand zy-logo" translate="no"><span class="zy-logo-z">Z</span>yphy</p>
+        <h1 class="plate-h1"><span class="line">Conta pra gente sobre o seu negócio.</span> <span class="line">Quem lê é quem vai programar o seu site.</span></h1>
+        <p class="plate-lead">Seis etapas sobre o seu negócio. No fim, o PDF é seu.</p>
+        <p class="plate-text">A Zyphy faz sites, apps e dashboards. O que você responder aqui é a base do texto do seu site.</p>
+        <p class="plate-text">Quem conversa com você é quem programa o projeto.</p>
+        <hr class="plate-rule">
+        <p class="plate-note">28 perguntas em 6 etapas. Dá pra parar e continuar depois, neste mesmo aparelho: o rascunho fica salvo no seu navegador.</p>
+        <p class="plate-note plate-note--privacy">Suas respostas não saem deste navegador: o rascunho fica salvo aqui, a página não tem analytics, e o PDF só chega na Zyphy se você enviar.</p>
+        <p class="plate-note"><a class="plate-link" href="https://www.zyphy.com.br/privacidade/" target="_blank" rel="noopener">Política de privacidade da Zyphy<span class="sr-only"> (abre em nova aba)</span></a></p>
+      </div>
+      <div class="progress" id="progress">
+        <p class="progress-step" id="progress-step">Etapa <span data-fill="step-n">1</span> de 6 · <span data-fill="step-name">Seu negócio</span></p>
+        <p class="progress-count"><span data-fill="req-done">0</span> de <span data-fill="req-total">11</span> obrigatórias respondidas</p>
+        <p class="progress-draft" id="progress-draft" hidden>Rascunho salvo neste navegador · <span data-fill="draft-time"></span></p>
+      </div>
+    </div>
+
+    <!-- ---------- Perguntas (coluna da direita) ---------- -->
+    <div class="sheet">
+      <form class="sheet-form" id="form" novalidate>
+
+        <p class="notice notice--draft" id="notice-recovered" hidden>Suas respostas de antes estão aqui. Continue de onde parou.</p>
+        <p class="notice notice--draft" id="notice-nodraft" hidden>Este navegador não está guardando rascunho. Termine numa vez só ou baixe o PDF antes de sair.</p>
+
+        <!-- ===== Etapa 1 ===== -->
+        <section class="step-panel" id="step-1" data-step="1" aria-labelledby="step-1-title">
+          <h2 class="step-title" id="step-1-title" tabindex="-1">Seu negócio</h2>
+          <p class="step-sub">Comece pelo básico.</p>
+
+          <div class="q" data-q="1" data-type="short" data-required>
+            <label class="q-label" for="p1"><span class="q-num">1</span> <span class="q-text">Nome da empresa</span> <span class="q-req">obrigatória</span></label>
+            <input class="field" id="p1" name="p1" type="text" autocomplete="organization" aria-required="true" aria-describedby="p1-err">
+            <p class="q-error" id="p1-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="2" data-type="short" data-required>
+            <label class="q-label" for="p2"><span class="q-num">2</span> <span class="q-text">Seu nome e cargo</span> <span class="q-req">obrigatória</span></label>
+            <input class="field" id="p2" name="p2" type="text" aria-required="true" aria-describedby="p2-err">
+            <p class="q-error" id="p2-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="3" data-type="long" data-required>
+            <label class="q-label" for="p3"><span class="q-num">3</span> <span class="q-text">O que a empresa vende ou faz?</span> <span class="q-req">obrigatória</span></label>
+            <p class="q-help" id="p3-help">Explique como se fosse pra um cliente novo.</p>
+            <textarea class="field field--long" id="p3" name="p3" aria-required="true" aria-describedby="p3-help p3-err"></textarea>
+            <p class="q-error" id="p3-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="4" data-type="short">
+            <label class="q-label" for="p4"><span class="q-num">4</span> <span class="q-text">Desde que ano a empresa existe?</span></label>
+            <input class="field field--year" id="p4" name="p4" type="text" inputmode="numeric" aria-describedby="p4-err">
+            <p class="q-error" id="p4-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="5" data-type="short" data-required>
+            <label class="q-label" for="p5"><span class="q-num">5</span> <span class="q-text">Onde vocês atendem?</span> <span class="q-req">obrigatória</span></label>
+            <p class="q-help" id="p5-help">Cidade, região ou online.</p>
+            <input class="field" id="p5" name="p5" type="text" aria-required="true" aria-describedby="p5-help p5-err">
+            <p class="q-error" id="p5-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="6" data-type="long" data-required>
+            <label class="q-label" for="p6"><span class="q-num">6</span> <span class="q-text">O que vocês fazem melhor que os concorrentes?</span> <span class="q-req">obrigatória</span></label>
+            <p class="q-help" id="p6-help">Quanto mais concreto, melhor: um prazo, um processo, uma garantia, algo que só vocês têm.</p>
+            <textarea class="field field--long" id="p6" name="p6" aria-required="true" aria-describedby="p6-help p6-err"></textarea>
+            <p class="q-error" id="p6-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="7" data-type="long">
+            <label class="q-label" for="p7"><span class="q-num">7</span> <span class="q-text">Cite dois ou três concorrentes.</span></label>
+            <p class="q-help" id="p7-help">Nome ou site.</p>
+            <textarea class="field field--long" id="p7" name="p7" aria-describedby="p7-help"></textarea>
+          </div>
+
+          <div class="step-actions">
+            <p class="step-summary" role="alert"></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn--primary" data-action="next">Próximo: Quem visita</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Etapa 2 ===== -->
+        <section class="step-panel" id="step-2" data-step="2" aria-labelledby="step-2-title" hidden>
+          <h2 class="step-title" id="step-2-title" tabindex="-1">Quem visita o site</h2>
+          <p class="step-sub">Pense em quem chega no site pela primeira vez.</p>
+
+          <div class="q" data-q="8" data-type="long" data-required>
+            <label class="q-label" for="p8"><span class="q-num">8</span> <span class="q-text">Quem é o seu cliente ideal?</span> <span class="q-req">obrigatória</span></label>
+            <textarea class="field field--long" id="p8" name="p8" aria-required="true" aria-describedby="p8-err"></textarea>
+            <p class="q-error" id="p8-err" hidden></p>
+          </div>
+
+          <fieldset class="q q--choice" data-q="9" data-type="choice" data-required data-other="p9-outro" aria-describedby="p9-err">
+            <legend class="q-label"><span class="q-num">9</span> <span class="q-text">O que você quer que o visitante faça no site?</span> <span class="q-req">obrigatória</span></legend>
+            <div class="options options--grid">
+              <label class="option"><input type="radio" name="p9" value="Chamar no WhatsApp"><span>Chamar no WhatsApp</span></label>
+              <label class="option"><input type="radio" name="p9" value="Pedir orçamento"><span>Pedir orçamento</span></label>
+              <label class="option"><input type="radio" name="p9" value="Comprar"><span>Comprar</span></label>
+              <label class="option"><input type="radio" name="p9" value="Agendar"><span>Agendar</span></label>
+              <label class="option"><input type="radio" name="p9" value="Ligar"><span>Ligar</span></label>
+              <label class="option"><input type="radio" name="p9" value="Outro"><span>Outro</span></label>
+            </div>
+            <p class="q-error" id="p9-err" hidden></p>
+            <div class="other" id="p9-other" data-required-when-open hidden>
+              <label class="other-label" for="p9-outro">Qual outra ação?</label>
+              <input class="field" id="p9-outro" name="p9-outro" type="text" placeholder="Ex.: preencher um formulário" aria-describedby="p9-outro-err">
+              <p class="q-error" id="p9-outro-err" hidden></p>
+            </div>
+          </fieldset>
+
+          <div class="q" data-q="10" data-type="long">
+            <label class="q-label" for="p10"><span class="q-num">10</span> <span class="q-text">Que dúvidas os clientes costumam ter antes de fechar?</span></label>
+            <textarea class="field field--long" id="p10" name="p10"></textarea>
+          </div>
+
+          <div class="step-actions">
+            <p class="step-summary" role="alert"></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn--primary" data-action="next">Próximo: Provas</button>
+              <button type="button" class="btn btn--ghost" data-action="back">Voltar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Etapa 3 ===== -->
+        <section class="step-panel" id="step-3" data-step="3" aria-labelledby="step-3-title" hidden>
+          <h2 class="step-title" id="step-3-title" tabindex="-1">Provas e números</h2>
+          <p class="step-sub">Escreva só o que pode ser publicado. Se não tiver, deixe em branco e siga.</p>
+
+          <div class="q" data-q="11" data-type="long">
+            <label class="q-label" for="p11"><span class="q-num">11</span> <span class="q-text">Números que a gente pode divulgar no site</span></label>
+            <p class="q-help" id="p11-help">Ex.: anos de mercado, clientes atendidos, prazo médio. Só o que pode ser publicado.</p>
+            <textarea class="field field--long" id="p11" name="p11" aria-describedby="p11-help"></textarea>
+          </div>
+
+          <div class="q" data-q="12" data-type="long">
+            <label class="q-label" for="p12"><span class="q-num">12</span> <span class="q-text">Clientes que a gente pode citar pelo nome</span></label>
+            <p class="q-help" id="p12-help">Só os que autorizaram.</p>
+            <textarea class="field field--long" id="p12" name="p12" aria-describedby="p12-help"></textarea>
+          </div>
+
+          <div class="q" data-q="13" data-type="long">
+            <label class="q-label" for="p13"><span class="q-num">13</span> <span class="q-text">Depoimentos de clientes</span></label>
+            <p class="q-help" id="p13-help">Cole o texto e o nome de quem disse. A gente precisa da autorização de cada pessoa por escrito (pode ser print do WhatsApp).</p>
+            <textarea class="field field--long" id="p13" name="p13" aria-describedby="p13-help"></textarea>
+          </div>
+
+          <div class="q" data-q="14" data-type="long">
+            <label class="q-label" for="p14"><span class="q-num">14</span> <span class="q-text">Prêmios, certificações ou parcerias</span></label>
+            <textarea class="field field--long" id="p14" name="p14"></textarea>
+          </div>
+
+          <div class="step-actions">
+            <p class="step-summary" role="alert"></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn--primary" data-action="next">Próximo: Contato</button>
+              <button type="button" class="btn btn--ghost" data-action="back">Voltar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Etapa 4 ===== -->
+        <section class="step-panel" id="step-4" data-step="4" aria-labelledby="step-4-title" hidden>
+          <h2 class="step-title" id="step-4-title" tabindex="-1">Atendimento e contato</h2>
+          <p class="step-sub">Os canais que vão aparecer no site.</p>
+
+          <div class="q" data-q="15" data-type="short" data-required data-format="whatsapp">
+            <label class="q-label" for="p15"><span class="q-num">15</span> <span class="q-text">WhatsApp para o site</span> <span class="q-req">obrigatória</span></label>
+            <input class="field field--phone" id="p15" name="p15" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000" aria-required="true" aria-describedby="p15-err">
+            <p class="q-error" id="p15-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="16" data-type="short" data-format="email">
+            <label class="q-label" for="p16"><span class="q-num">16</span> <span class="q-text">E-mail para o site</span></label>
+            <input class="field" id="p16" name="p16" type="email" autocomplete="email" placeholder="contato@suaempresa.com.br" aria-describedby="p16-err">
+            <p class="q-error" id="p16-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="17" data-type="long">
+            <label class="q-label" for="p17"><span class="q-num">17</span> <span class="q-text">Redes sociais</span></label>
+            <p class="q-help" id="p17-help">Cole os links.</p>
+            <textarea class="field field--long" id="p17" name="p17" aria-describedby="p17-help"></textarea>
+          </div>
+
+          <div class="q" data-q="18" data-type="short">
+            <label class="q-label" for="p18"><span class="q-num">18</span> <span class="q-text">Horário de atendimento</span></label>
+            <input class="field" id="p18" name="p18" type="text">
+          </div>
+
+          <fieldset class="q q--choice" data-q="19" data-type="choice" data-other="p19-outro">
+            <legend class="q-label"><span class="q-num">19</span> <span class="q-text">Em quanto tempo vocês costumam responder uma mensagem?</span></legend>
+            <div class="options options--grid">
+              <label class="option"><input type="radio" name="p19" value="Na hora"><span>Na hora</span></label>
+              <label class="option"><input type="radio" name="p19" value="No mesmo dia"><span>No mesmo dia</span></label>
+              <label class="option"><input type="radio" name="p19" value="Em até 24h"><span>Em até 24h</span></label>
+              <label class="option"><input type="radio" name="p19" value="Outro"><span>Outro</span></label>
+            </div>
+            <div class="other" id="p19-other" hidden>
+              <label class="other-label" for="p19-outro">Em quanto tempo, mais ou menos?</label>
+              <input class="field" id="p19-outro" name="p19-outro" type="text" placeholder="Ex.: em até dois dias úteis">
+            </div>
+          </fieldset>
+
+          <div class="q" data-q="20" data-type="short">
+            <label class="q-label" for="p20"><span class="q-num">20</span> <span class="q-text">Endereço físico para aparecer no site</span></label>
+            <p class="q-help" id="p20-help">Deixe em branco se não quiser.</p>
+            <input class="field" id="p20" name="p20" type="text" aria-describedby="p20-help">
+          </div>
+
+          <div class="step-actions">
+            <p class="step-summary" role="alert"></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn--primary" data-action="next">Próximo: Gosto e marca</button>
+              <button type="button" class="btn btn--ghost" data-action="back">Voltar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Etapa 5 ===== -->
+        <section class="step-panel" id="step-5" data-step="5" aria-labelledby="step-5-title" hidden>
+          <h2 class="step-title" id="step-5-title" tabindex="-1">Gosto e identidade</h2>
+          <p class="step-sub">Não precisa falar de design. Conte o que você gosta de ver.</p>
+
+          <div class="q" data-q="21" data-type="long" data-required>
+            <label class="q-label" for="p21"><span class="q-num">21</span> <span class="q-text">Três sites que você gosta (de qualquer área) e por quê</span> <span class="q-req">obrigatória</span></label>
+            <textarea class="field field--long" id="p21" name="p21" aria-required="true" aria-describedby="p21-err"></textarea>
+            <p class="q-error" id="p21-err" hidden></p>
+          </div>
+
+          <div class="q" data-q="22" data-type="long">
+            <label class="q-label" for="p22"><span class="q-num">22</span> <span class="q-text">Um site que você não gosta e por quê</span></label>
+            <textarea class="field field--long" id="p22" name="p22"></textarea>
+          </div>
+
+          <fieldset class="q q--choice" data-q="23" data-type="choice" data-required aria-describedby="p23-err">
+            <legend class="q-label"><span class="q-num">23</span> <span class="q-text">Vocês já têm logo e cores?</span> <span class="q-req">obrigatória</span></legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="p23" value="Tenho manual de marca"><span>Tenho manual de marca</span></label>
+              <label class="option"><input type="radio" name="p23" value="Tenho logo, sem manual"><span>Tenho logo, sem manual</span></label>
+              <label class="option"><input type="radio" name="p23" value="Não tenho"><span>Não tenho</span></label>
+            </div>
+            <p class="q-error" id="p23-err" hidden></p>
+          </fieldset>
+
+          <fieldset class="q q--choice" data-q="24" data-type="choice">
+            <legend class="q-label"><span class="q-num">24</span> <span class="q-text">Vocês têm fotos próprias (equipe, produtos, local)?</span></legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="p24" value="Sim, profissionais"><span>Sim, profissionais</span></label>
+              <label class="option"><input type="radio" name="p24" value="Sim, de celular"><span>Sim, de celular</span></label>
+              <label class="option"><input type="radio" name="p24" value="Não"><span>Não</span></label>
+            </div>
+          </fieldset>
+
+          <p class="notice notice--end">Logo, fotos e manual de marca: mande pelo WhatsApp junto com o PDF.</p>
+
+          <div class="step-actions">
+            <p class="step-summary" role="alert"></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn--primary" data-action="next">Próximo: Parte técnica</button>
+              <button type="button" class="btn btn--ghost" data-action="back">Voltar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Etapa 6 ===== -->
+        <section class="step-panel" id="step-6" data-step="6" aria-labelledby="step-6-title" hidden>
+          <h2 class="step-title" id="step-6-title" tabindex="-1">Parte técnica</h2>
+          <p class="step-sub">Se não souber, marque “Não sei” e siga.</p>
+
+          <div class="q" data-q="25" data-type="short">
+            <label class="q-label" for="p25"><span class="q-num">25</span> <span class="q-text">Já tem site? Qual o endereço?</span></label>
+            <input class="field" id="p25" name="p25" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="suaempresa.com.br">
+          </div>
+
+          <fieldset class="q q--choice" data-q="26" data-type="choice" aria-describedby="p26-help">
+            <legend class="q-label"><span class="q-num">26</span> <span class="q-text">Já tem domínio registrado?</span></legend>
+            <p class="q-help" id="p26-help">Domínio é o endereço do site, tipo suaempresa.com.br.</p>
+            <div class="options">
+              <label class="option"><input type="radio" name="p26" value="Sim"><span>Sim</span></label>
+              <label class="option"><input type="radio" name="p26" value="Não"><span>Não</span></label>
+              <label class="option"><input type="radio" name="p26" value="Não sei"><span>Não sei</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="q q--choice" data-q="27" data-type="choice" data-required aria-describedby="p27-err">
+            <legend class="q-label"><span class="q-num">27</span> <span class="q-text">O site vai coletar dados de clientes (formulário, cadastro, compras)?</span> <span class="q-req">obrigatória</span></legend>
+            <div class="options">
+              <label class="option"><input type="radio" name="p27" value="Sim"><span>Sim</span></label>
+              <label class="option"><input type="radio" name="p27" value="Não"><span>Não</span></label>
+              <label class="option"><input type="radio" name="p27" value="Não sei"><span>Não sei</span></label>
+            </div>
+            <p class="q-error" id="p27-err" hidden></p>
+          </fieldset>
+
+          <div class="q" data-q="28" data-type="long">
+            <label class="q-label" for="p28"><span class="q-num">28</span> <span class="q-text">Algo mais que a gente deveria saber?</span></label>
+            <textarea class="field field--long" id="p28" name="p28"></textarea>
+          </div>
+
+          <div class="confirm" data-confirm>
+            <label class="confirm-label" for="confirm">
+              <span class="confirm-box">
+                <input class="confirm-input" id="confirm" name="confirm" type="checkbox" aria-required="true" aria-describedby="confirm-err">
+                <svg class="confirm-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 12.5l4 4 8-9"/></svg>
+              </span>
+              <span>Confirmo que as informações acima são verdadeiras e podem ser usadas no site.</span>
+            </label>
+            <p class="q-error" id="confirm-err" hidden></p>
+          </div>
+
+          <div class="step-actions">
+            <p class="step-summary" role="alert"></p>
+            <div class="btn-row">
+              <button type="button" class="btn btn--primary btn--swap" data-action="generate">
+                <span class="btn-label">Gerar o PDF</span>
+                <span class="btn-label btn-label--busy" aria-hidden="true">Gerando o PDF…</span>
+              </button>
+              <button type="button" class="btn btn--ghost" data-action="back">Voltar</button>
+            </div>
+          </div>
+        </section>
+      </form>
+
+      <!-- ===== Tela final ===== -->
+      <section class="final" id="final" aria-labelledby="final-title" hidden>
+        <h2 class="step-title final-title" id="final-title" tabindex="-1">O PDF da <span data-fill="company"></span> está pronto.</h2>
+        <p class="final-body">Confira se está tudo certo e mande pra gente pelo WhatsApp. Logo, fotos e manual de marca vão na mesma conversa.</p>
+        <div class="btn-row final-actions">
+          <button type="button" class="btn btn--primary" data-action="send">Enviar pra Zyphy</button>
+          <button type="button" class="btn btn--ghost" data-action="download">Baixar</button>
+        </div>
+        <p class="final-status" id="final-status" role="status"></p>
+        <p class="final-edit"><button type="button" class="link-btn" data-action="edit">Voltar e editar respostas</button></p>
+        <div class="final-notes">
+          <p class="final-note">A gente responde no mesmo dia, inclusive fim de semana e à noite.</p>
+          <p class="final-note">Se o projeto não fechar, os dados que você enviar são apagados 12 meses depois do último contato.</p>
+        </div>
+
+        <!-- prévia: a mesma lista de respostas que monta o PDF (js/app.js › collect) -->
+        <section class="preview" aria-labelledby="preview-title">
+          <h3 class="preview-head" id="preview-title">Zyphy · Questionário do site</h3>
+          <dl class="preview-spec">
+            <div class="preview-spec-row"><dt>Empresa</dt><dd data-fill="pv-company"></dd></div>
+            <div class="preview-spec-row"><dt>Respondido por</dt><dd data-fill="pv-person"></dd></div>
+            <div class="preview-spec-row"><dt>Data</dt><dd data-fill="pv-date"></dd></div>
+          </dl>
+          <div class="preview-sections" id="preview-sections"></div>
+          <p class="preview-confirm" id="preview-confirm"></p>
+          <p class="final-edit"><button type="button" class="link-btn" data-action="edit">Voltar e editar respostas</button></p>
+        </section>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <ul class="footer-links" role="list">
+    <li><a href="https://www.zyphy.com.br/privacidade/" target="_blank" rel="noopener">Política de privacidade da Zyphy<span class="sr-only"> (abre em nova aba)</span></a></li>
+    <li><a href="https://wa.me/5511924507188" target="_blank" rel="noopener">WhatsApp da Zyphy: +55 11 92450-7188<span class="sr-only"> (abre em nova aba)</span></a></li>
+  </ul>
+</footer>
+</body>
+</html>

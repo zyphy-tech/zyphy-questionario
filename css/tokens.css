@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Questionário do site (Zyphy) — tokens. Materializado do DESIGN.md, que é a
+   única fonte de tokens (gerado da direcao.md aprovada em 2026-10-01). Os
+   valores herdados são os do zyphy-site/css/tokens.css (linha citada na
+   direcao.md). Nenhum valor de cor, fonte, tamanho, espaço, raio ou duração
+   aparece fora deste arquivo, em CSS ou JS (o js/pdf.js lê as cores daqui
+   por getComputedStyle). Exceções técnicas, como no site:
+     - breakpoints dentro de @media: CSS não aceita var() em media query
+     - utilitário .sr-only (1px / -1px / clip), técnica padrão de a11y
+     - .001ms do bloco de reduced-motion (desliga transição, não é estilo)
+     - <meta name="theme-color"> no HTML: meta não lê variável CSS
+     - medidas do PDF em pontos (js/pdf.js, objeto PDF): são do papel A4,
+       não da página, e seguem a direcao.md › PDF
+   ========================================================================== */
+
+/* ---------- Fontes (auto-hospedadas, subset latino, OFL 1.1) ----------
+   Os mesmos arquivos do zyphy-site/assets/fonts/. */
+
+/* display: H1, títulos das etapas, números. Só o peso 800 */
+@font-face{
+  font-family:'Sofia Sans Extra Condensed';
+  font-style:normal;
+  font-weight:800;
+  font-display:swap;
+  src:url("../assets/fonts/sofia-sans-extra-condensed-800-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* reserva métrica da display enquanto a Sofia não chega: a mesma calibração
+   do site (Impact, size-adjust 81.3%). Sem Impact cai no sans-serif */
+@font-face{
+  font-family:'Sofia Fallback';
+  font-style:normal;
+  font-weight:800;
+  src:local('Impact');
+  size-adjust:81.3%;
+  ascent-override:110.70%;
+  descent-override:36.90%;
+  line-gap-override:0%;
+}
+
+/* texto e interface: Archivo variável (peso 100–900) */
+@font-face{
+  font-family:'Archivo';
+  font-style:normal;
+  font-weight:100 900;
+  font-display:swap;
+  src:url("../assets/fonts/archivo-var-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+:root{
+  color-scheme:dark;
+
+  /* ---------- Cor: primitivos (DESIGN.md › colors) ----------
+     Contraste (site, tokens.css:74–81): mist-100 sobre 900 14.0; mist-400
+     sobre 900 6.9 e sobre 950 8.3; ciano sobre 900 8.2; ink-950 sobre ciano
+     9.8; coral sobre 900 7.2; mist-50 sobre petróleo 11.9 */
+  --ink-950:#050B0B;
+  --ink-900:#112222;
+  --ink-850:#1E3535;     /* não usado na v1 */
+  --petrol-700:#0E3634;
+  --mist-50:#E8F7F4;
+  --mist-100:#E3EFED;
+  --mist-400:#93ADAA;
+  --cyan-500:#00CBCC;
+  --cyan-400:#00E0E1;
+  --coral-300:#FF8A80;
+  --sage-500:#5E8884;
+  --sage-600:#4F7A76;
+  --line:rgba(227,239,237,.12);
+  --error-ring:rgba(255,138,128,.2);
+
+  /* ---------- Cor: papéis ---------- */
+  --page:var(--ink-950);           /* fundo da página */
+  --surface:var(--ink-900);        /* cartão e coluna das perguntas */
+  --surface-field:var(--ink-950);  /* campo e opção dentro da coluna */
+  --plate:var(--petrol-700);       /* a placa: única superfície de cor chapada */
+  --text:var(--mist-100);
+  --text-muted:var(--mist-400);
+  --text-on-plate:var(--mist-50);  /* nunca mist-400 sobre o petróleo */
+  --line-control:var(--sage-500);  /* borda de campo e opção (3:1) */
+  --mark-idle:var(--mist-400);     /* contorno do radio e da caixa vazios */
+  /* acento raro: ação e estado */
+  --accent:var(--cyan-500);
+  --accent-hover:var(--cyan-400);
+  --on-accent:var(--ink-950);
+  --focus-ring:var(--cyan-500);
+  --error:var(--coral-300);
+  /* barras das etapas */
+  --step-idle:var(--sage-600);
+  --step-done:var(--mist-100);
+  --step-missing:var(--coral-300);
+  --step-current:var(--accent);
+  /* seleção de texto: o petróleo da placa, texto claro */
+  --selection-bg:var(--petrol-700);
+  --selection-text:var(--mist-50);
+
+  /* ---------- Tipografia ---------- */
+  --font-display:'Sofia Sans Extra Condensed','Sofia Fallback',sans-serif;
+  --font-body:'Archivo',system-ui,sans-serif;
+
+  --weight-body:400;
+  --weight-medium:500;
+  --weight-strong:600;
+  --weight-display:800;
+
+  --fs-h1:clamp(2.5rem,13cqi,3.5rem);              /* H1 da placa, preso à largura dela */
+  --fs-title:clamp(2rem,1.5rem + 1.5vw,2.5rem);    /* título da etapa e da tela final */
+  --fs-h3:1.5rem;                                  /* número da etapa, seção da prévia */
+  --fs-lead:clamp(1.25rem,0.9rem + 1vw,1.5rem);    /* subtítulo, marca */
+  --fs-body:1.0625rem;                             /* 17px: enunciado, campo, opção */
+  --fs-small:0.9375rem;                            /* 15px: ajuda, erro, progresso, rodapé */
+
+  --lh-h1:1;            /* caixa alta com acento (NEGÓCIO, LÊ): 0.9 encosta */
+  --lh-display:0.9;
+  --lh-heading:1.35;
+  --lh-body:1.6;
+  --lh-lead:1.4;
+  --lh-small:1.5;
+
+  --tracking-display:0;
+  --case-display:uppercase;
+  --numeric-data:tabular-nums;
+
+  --measure:60ch;
+  --measure-sheet:600px;     /* medida útil da coluna das perguntas */
+  --field-year:10ch;         /* P4 */
+  --field-phone:20ch;        /* P15 */
+  --spec-label:9rem;         /* coluna do rótulo na ficha da prévia */
+  --pv-indent:3ch;           /* recuo deslocado do número na prévia ("28.") */
+
+  /* ---------- Espaço (base 4) ---------- */
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:24px;
+  --space-6:32px;
+  --space-7:48px;
+  --space-8:64px;
+
+  /* ---------- Layout ---------- */
+  --card-max:1160px;
+  --form-max:760px;          /* tablet */
+  --gutter:20px;             /* celular: padding lateral */
+  --card-pad:var(--space-7);
+  --tap:44px;
+  --control-h:48px;
+  --textarea-min-h:128px;
+  --mark-size:20px;          /* radio */
+  --mark-border:2px;         /* contorno do radio e da caixa */
+  --mark-dot-gap:4px;        /* folga entre o contorno e o ponto do radio */
+  --check-size:24px;         /* caixa de confirmação */
+  --step-bar:2px;            /* barra de estado da etapa */
+  --hairline:1px;
+  --focus-width:2px;
+  --focus-offset:3px;
+  --ring:3px;                /* anel do campo inválido */
+  --underline-offset:4px;
+  --sticky-top:var(--space-5);  /* progresso grudado no topo da coluna */
+
+  /* ---------- Raio ---------- */
+  --r-none:0;
+  --r-control:4px;
+  --r-screen:12px;
+
+  /* ---------- Movimento (um comportamento só: a barra da etapa atual) ---------- */
+  --ease-out:cubic-bezier(.215,.61,.355,1);   /* o mesmo do site */
+  --dur-fast:200ms;                            /* hover e foco: só cor */
+  --dur-step:240ms;                            /* barra da etapa atual deslizando */
+}
