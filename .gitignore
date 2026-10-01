@@ -3,3 +3,15 @@
 .env
 .env.*
 !.env.example
+# Artefatos do QA gerados a cada medição (zyphy-ciclo). Ficam versionados:
+# qa/config.json e qa/historico.md.
+qa/medicao.json
+qa/pontuacao.json
+qa/review.json
+qa/julgamento.json
+qa/prints/
+# Aprendizados nunca ficam no repo do site (pode ser público): vão para
+# docs/aprendizados/<site>-<AAAA-MM>.md no zyphy-pipeline (privado).
+qa/aprendizados.md
+# Cadeado do zyphy-ciclo (um ciclo por repo); some quando o ciclo para.
+.zyphy-ciclo.lock
