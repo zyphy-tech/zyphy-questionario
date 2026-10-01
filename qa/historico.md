@@ -46,3 +46,13 @@ as entradas já gravadas: elas registram o que foi medido em cada commit.
 - **Bloqueios:** nenhum
 - **Correções aplicadas:** 0/0 — aprovado no rápido, sem correção
 - **Precisa de humano:** QA-13 (brief: fica como está; a correção do review contraria o brief); IMP cramped-padding (prioridade 2, não aplicada: aprovado)
+
+## Volta 2 — 2026-10-01 (ciclo 2)
+
+- **Commit medido:** 3363c77
+- **Modo:** completo
+- **URL medida:** https://zyphy-questionario-o6fzqzbcs-zyphy1.vercel.app/
+- **Nota:** 85,1/100 (medido 49,1/60, julgado 36/40) · aprovado sim
+- **Bloqueios:** nenhum
+- **Correções aplicadas:** 0/0 — aprovado no completo, sem correção
+- **Precisa de humano:** QA-13 (brief: fica como está); IMP cramped-padding (prioridade 2, não aplicada); a pontuação do impeccable ainda conta ai-color-palette e all-caps-body, que têm exceção no qa/config.json
