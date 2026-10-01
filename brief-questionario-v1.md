@@ -19,3 +19,11 @@ HTML/CSS/JS vanilla. Biblioteca de PDF hospedada no próprio site (sem CDN de te
 - Tratamento: "você" e "seu" em todo o texto.
 - Sem estimativa de tempo; usar "28 perguntas em 6 etapas".
 - Página fora do Google (noindex), porque o questionário é enviado por link.
+- PDF: gerado com pdf-lib + fontkit (dependência nova aprovada pelo Weslley), hospedada no próprio site e carregada só no clique; fontes Archivo e Sofia em TTF estático, embutidas.
+- Prévia: a tela final mostra uma prévia das respostas em HTML, no modo escuro, com a estrutura do PDF.
+- PDF em papel branco (o modo escuro vale só para a página).
+- "Outro" nas perguntas 9 e 19 abre um campo curto; rótulo definido no copy.md.
+- og:image: imagem só com texto e marca (placa petróleo, Z e o H1 em Sofia).
+- Rodapé mínimo com o link da política de privacidade e o WhatsApp da Zyphy (F35). Sem exceções no qa/config.json; QA-13 (sitemap e JSON-LD) fica como está e desconta pontos por causa do noindex.
+- Aprovadas as interpretações da direção: progresso conta só as 11 obrigatórias (a caixa de confirmação fica fora); a pessoa pode pular para qualquer etapa pelo topo; sem autofocus ao carregar; link da política abre em nova aba.
+- Direção (direcao.md) aprovada pelo Weslley.

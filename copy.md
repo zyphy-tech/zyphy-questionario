@@ -63,6 +63,9 @@ Notas para quem aplica o texto:
 - **P8 · longa · obrigatória:** Quem é o seu cliente ideal?
 - **P9 · escolha única · obrigatória:** O que você quer que o visitante faça no site?
   - **Opções:** Chamar no WhatsApp · Pedir orçamento · Comprar · Agendar · Ligar · Outro
+  - **Campo do "Outro" (rótulo):** Qual outra ação?
+  - **Placeholder do "Outro":** Ex.: preencher um formulário
+  - **Erro se o "Outro" ficar em branco:** Escreva qual ação pra seguir.
 - **P10 · longa · opcional:** Que dúvidas os clientes costumam ter antes de fechar?
 - **CTA:** Próximo: Provas
 - **Secundário:** Voltar
@@ -94,6 +97,8 @@ Notas para quem aplica o texto:
 - **P18 · curta · opcional:** Horário de atendimento
 - **P19 · escolha única · opcional:** Em quanto tempo vocês costumam responder uma mensagem?
   - **Opções:** Na hora · No mesmo dia · Em até 24h · Outro
+  - **Campo do "Outro" (rótulo):** Em quanto tempo, mais ou menos?
+  - **Placeholder do "Outro":** Ex.: em até dois dias úteis
 - **P20 · curta · opcional:** Endereço físico para aparecer no site
   - **Ajuda:** Deixe em branco se não quiser.
 - **CTA:** Próximo: Gosto e marca
@@ -175,6 +180,13 @@ Notas para quem aplica o texto:
 - **Rascunho recuperado:** Suas respostas de antes estão aqui. Continue de onde parou.
 - **Sem rascunho disponível:** Este navegador não está guardando rascunho. Termine numa vez só ou baixe o PDF antes de sair.
 - **Erro ao gerar o PDF:** Não deu pra gerar o PDF. Tente de novo: suas respostas continuam neste navegador.
+
+## 13. Rodapé
+
+- **Link 1:** Política de privacidade da Zyphy → https://www.zyphy.com.br/privacidade/
+- **Link 2:** WhatsApp da Zyphy: +55 11 92450-7188 [F35]
+- **Destino do link 2:** https://wa.me/5511924507188, sem texto pronto [F35].
+- **Texto acessível do link 2:** sem aria-label; o texto visível já diz o canal, de quem é e o número. O aviso de nova aba é o mesmo do link da política.
 
 ## SEO
 
