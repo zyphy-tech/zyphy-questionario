@@ -37,6 +37,8 @@ Regras: ID nunca reaproveitado · fonte concreta (quem disse e onde) · número 
 | F31 | Dados de quem virou cliente são guardados por 5 anos após o fim do projeto | Weslley — política de privacidade da Zyphy | 2026-09-30 |
 | F32 | Dados de quem não fechou projeto são guardados por 12 meses após o último contato e depois apagados | Weslley — política de privacidade da Zyphy | 2026-09-30 |
 | F33 | Pedidos sobre dados pessoais são respondidos em até 15 dias | Weslley — política de privacidade da Zyphy | 2026-09-30 |
+| F34 | O questionário não envia respostas a nenhum servidor: o rascunho fica no navegador da pessoa, não há analytics, e o PDF só chega à Zyphy se a pessoa enviar | Decisão do Weslley no brief-questionario-v1.md (01/10/2026); conferir na medição | 2026-10-01 |
+| F35 | WhatsApp da Zyphy: +55 11 92450-7188 | Rodapé do zyphy.com.br, confirmado pelo Weslley | 2026-10-01 |
 
 ## A confirmar
 
