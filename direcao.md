@@ -2,9 +2,12 @@
 
 - Data: 2026-10-01
 - **Status: aprovada pelo Weslley em 2026-10-01**, com as decisões registradas em
-  `brief-questionario-v1.md` §3 (linhas 22–29) e resumidas em "Decisões do
-  Weslley" no fim deste arquivo. Próximo passo: CONSTRUCAO (`/impeccable init`
-  gera o `DESIGN.md` a partir deste arquivo).
+  `brief-questionario-v1.md` §3 (linhas 22–32) e resumidas em "Decisões do
+  Weslley" no fim deste arquivo.
+- **Atualização de 2026-10-01 (depois da volta 2 do ciclo):** nova ordem no
+  celular e no tablet (brief §3, linha 31). Mudam: "Ideia do hero" (primeira
+  tela), "Layout › Tablet", "Layout › Celular", "Troca de etapa", "Rodapé",
+  "Componentes › Placa", "Tela final" e a tabela de decisões. O desktop não muda.
 - Modo: DIRECAO (fase 3), atualizada com as respostas aos pontos em aberto.
 - Insumos: `brief-questionario-v1.md` (§3 Decisões travadas), `copy.md` (aprovado),
   `fatos-cliente.md`, `perguntas.md`, `refs/` + `refs/NOTAS.md`, e a identidade do
@@ -49,8 +52,12 @@ Antes de rolar, a primeira tela conta a história inteira:
 - **quanto é** — as 6 etapas numeradas no topo;
 - **o que a pessoa leva** — subtítulo: "Seis etapas sobre o seu negócio. No fim, o
   PDF é seu.";
-- **o primeiro passo** — no desktop, o campo P1 já aparece na primeira tela
-  (1366×768 e 1440×900); no celular, a primeira tela mostra etapas, H1 e subtítulo.
+- **o primeiro passo** — o campo P1 já aparece na primeira tela: no desktop
+  (1366×768 e 1440×900), no tablet (768×1024) e no celular (360×800 e 375×812).
+  No celular a primeira tela é: etapas, progresso, marca, H1, subtítulo, título
+  da etapa 1, "Comece pelo básico." e a pergunta 1 com o campo inteiro (ver
+  "Layout › Celular"). O resto da placa (corpo, quem lê, tamanho, privacidade e
+  link) vai para depois das perguntas (brief §3, linha 31).
 
 O H1 é tratado em dois blocos: cada frase começa numa linha nova, para "Quem lê é
 quem vai programar o seu site." ser lida como frase própria. Sem palavra em
@@ -115,7 +122,7 @@ Só primitivos do `zyphy-site`. Nenhum valor novo de cor na página.
 | `--ink-950` | `#050B0B` | fundo da página; fundo dos campos e das opções; faixa das etapas no celular | `tokens.css:85` |
 | `--ink-900` | `#112222` | o cartão e a coluna das perguntas | `tokens.css:86` |
 | `--ink-850` | `#1E3535` | não usado na v1 | `tokens.css:87` |
-| `--petrol-700` | `#0E3634` | a placa da esquerda — a única superfície de cor chapada | `tokens.css:88` |
+| `--petrol-700` | `#0E3634` | a placa da esquerda — a única superfície de cor chapada (abaixo de 1100px, a mesma placa em duas faixas: cabeçalho e fim da placa) | `tokens.css:88` |
 | `--mist-50` | `#E8F7F4` | todo texto sobre a placa (11.9:1) | `tokens.css:89` |
 | `--mist-100` | `#E3EFED` | texto principal; barra de etapa feita | `tokens.css:90` |
 | `--mist-400` | `#93ADAA` | texto secundário fora da placa (ajuda, "obrigatória", placeholder); contorno do radio/checkbox vazio; borda do botão secundário | `tokens.css:91` |
@@ -219,11 +226,31 @@ página --ink-950
 ### Tablet (600–1099px)
 
 Uma coluna, cartão centrado com `--form-max` 760px (`tokens.css:261`) e raio 12.
-Ordem: etapas → bloco de progresso → placa → perguntas. Etapas com número e
-rótulo (o rótulo pode quebrar em duas linhas). Rodapé abaixo do cartão, como no
-desktop, alinhado às bordas dos 760px.
+Etapas com número e rótulo (o rótulo pode quebrar em duas linhas). Rodapé abaixo
+do cartão, como no desktop, alinhado às bordas dos 760px.
+
+**Ordem: a mesma do celular** — etapas → bloco de progresso → cabeçalho da placa
+(marca, H1, subtítulo) → perguntas → fim da placa (corpo, quem lê, tamanho,
+privacidade, link). Escolha da direção (a decisão do brief §3, linha 31 fala do
+celular e do desktop; o tablet não foi citado). Por quê:
+
+- o tablet é uma coluna, como o celular, e tem o mesmo defeito: no print da
+  volta 2 (`qa/prints/home_768x1024.png`) o campo P1 termina em ~1290px, fora
+  dos 1024px. Com a ordem nova, a estimativa a partir do mesmo print é ~940px;
+- duas ordens para o mesmo layout de uma coluna seria uma regra a mais para
+  construir e testar, sem ganho para quem preenche.
+
+Diferenças do celular: o padding do cabeçalho da placa fica em `--card-pad`
+(48px), porque a conta acima já cabe com ele; e o fim da placa é a última faixa
+dentro do cartão, então leva o raio de 12px nos dois cantos de baixo (o cartão
+continua sem `overflow:hidden`).
 
 ### Celular (< 600px)
+
+Decidido pelo Weslley (brief §3, linha 31): etapas → H1 e subtítulo → perguntas
+→ resto da placa. Motivo: C2 da volta 2 — a pergunta 1 aparecia em y≈1210 no
+print de 375×812 (`qa/prints/home_375x812.png`), e o campo terminava em ~1260.
+O desktop não muda.
 
 Uma coluna, de borda a borda (sem margem de cartão, raio 0), padding lateral
 `--gutter` (`tokens.css:254`, 20px).
@@ -231,23 +258,70 @@ Uma coluna, de borda a borda (sem margem de cartão, raio 0), padding lateral
 1. **Etapas** (fundo `--ink-950`): seis números com a barra de estado, ~55px cada
    em 360px, alvo ≥ 44px. O rótulo de cada etapa fica no botão, visualmente
    oculto (o leitor de tela lê "1 Seu negócio").
-2. **Bloco de progresso** logo abaixo das etapas: em vez de ficar no fim da placa,
-   vira a legenda das etapas, porque no celular os números sozinhos não dizem
-   onde a pessoa está. Mesmo elemento, reposicionado por grid; sem sticky.
-3. **Placa** petróleo: marca, H1, subtítulo, corpo, quem lê, tamanho, privacidade,
-   link. O aviso de privacidade fica antes do primeiro campo: a pessoa sabe que nada
-   sai do navegador antes de digitar.
-4. **Perguntas** (fundo `--ink-900`).
-5. **Rodapé** (fundo `--ink-950`), depois do botão da etapa.
+2. **Bloco de progresso** (fundo `--ink-950`), logo abaixo das etapas, como
+   antes: é a legenda das etapas, porque no celular os números sozinhos não dizem
+   onde a pessoa está. Não faz parte do "resto da placa" da decisão: no desktop
+   ele mora no fim da placa só para poder ser sticky ao lado das perguntas; no
+   celular ele já estava fora dela. Sem sticky. Custa ~70px na primeira tela e
+   traz a linha "Rascunho salvo neste navegador · {hh:mm}" para o topo.
+3. **Cabeçalho da placa** (petróleo): marca "Zyphy" → H1 → subtítulo. Padding
+   `--space-6` (32px) em cima e embaixo — mais curto que os 48px de antes,
+   porque a faixa agora é só um cabeçalho, e é a folga que garante o P1 na
+   primeira tela em 360×800. **A marca fica aqui**, acima do H1, como em toda
+   largura: o H1 começa com "Conta pra gente", e é a marca que diz quem é a
+   "gente"; ela ocupa uma linha.
+4. **Perguntas** (fundo `--ink-900`): título da etapa, subtítulo, perguntas,
+   avisos da etapa, "Faltam {n}…" e os botões da etapa. Padding `--space-7`
+   (48px) em cima e embaixo, como antes.
+5. **Fim da placa** (petróleo), **depois dos botões da etapa**: Corpo → Quem lê
+   → divisória `--line` → Tamanho → Privacidade → link "Política de privacidade
+   da Zyphy". Mesma ordem, tamanhos e pesos da placa no desktop (Corpo e Quem lê
+   17px; Tamanho e Privacidade 15px, Privacidade em 500; link sublinhado
+   `--mist-50`). Padding `--space-7` (48px) em cima e embaixo, `--gutter` nas
+   laterais. Vem depois dos botões, não entre a última pergunta e o botão,
+   porque o botão é o passo seguinte ao último campo (ver Botões); texto da placa
+   no meio separaria os dois e empurraria o botão para baixo.
+6. **Rodapé** (fundo `--ink-950`), depois do fim da placa.
 
-As faixas vizinhas são sempre diferentes (950 → petróleo → 900 → 950), como as
-bandas do site. Nenhuma faixa é fixa na tela (regra 6).
+As faixas vizinhas são sempre diferentes (950 → petróleo → 900 → petróleo →
+950), como as bandas do site. A placa continua sendo a única superfície
+petróleo; no celular ela aparece em duas faixas, cabeçalho e fim, e cada uma
+encosta só em 950 ou 900. Nenhuma faixa é fixa na tela (regra 6).
+
+**Primeira tela (375×812), estimada a partir do print da volta 2:** etapas e
+progresso até ~137px; cabeçalho da placa até ~515px; título da etapa, "Comece
+pelo básico." e a pergunta 1, com o campo terminando em ~755px. Em 360×800 o H1
+encolhe junto com a placa (`13cqi`) e a conta fica parecida. Medir no build com
+print nas duas larguras. Se o campo não couber inteiro, o primeiro ajuste é o
+padding de cima das perguntas (48 → 32px); o H1 não desce abaixo do mínimo do
+`clamp` e a marca não sai sem perguntar.
+
+**O que saiu, por quê e o que ficou (regra 1):** sai, no celular e no tablet, o
+aviso de privacidade antes do primeiro campo (a versão anterior desta direção
+dizia "a pessoa sabe que nada sai do navegador antes de digitar"). Motivo: C2,
+decisão do Weslley de 2026-10-01 (brief §3, linha 31). No lugar: a linha
+"Rascunho salvo neste navegador · {hh:mm}" no progresso, no topo, a partir do
+primeiro salvamento; o aviso completo e o link no fim da placa; o link de novo
+no rodapé. Efeito conhecido: o A2 da rubrica (aviso de privacidade na primeira
+tela do celular, prioridade 3 na volta 2) continua sem ser atendido no celular,
+agora por decisão registrada.
+
+**Ordem no DOM = ordem na tela do celular.** O cabeçalho da placa e o fim da
+placa são dois elementos separados no markup: cabeçalho → perguntas → fim da
+placa. Reordenar só pelo CSS (`order`, áreas de grid) deixaria o link da
+política, que é focável, antes do P1 no tab e lá embaixo na tela. No desktop o
+grid devolve o fim da placa à coluna da esquerda, logo abaixo do cabeçalho, sem
+mudança visual; o progresso continua o último item da coluna, sticky. A única
+diferença no desktop é de tab: o link da política passa a vir depois dos botões
+da etapa, não antes do P1 — ordem coerente com a do celular.
 
 ### Troca de etapa (todas as larguras)
 
 "Próximo" e "Voltar" trocam a etapa sem animação (ver Movimento), levam a rolagem
 **sem suavização** até o topo da etapa (no desktop, o topo do cartão, com as
-etapas à vista) e passam o foco para o título da nova etapa (`tabindex="-1"`).
+etapas à vista; no celular e no tablet, o topo da faixa das perguntas, sem
+mostrar de novo o cabeçalho da placa, que a pessoa já leu) e passam o foco para
+o título da nova etapa (`tabindex="-1"`).
 Sem `autofocus` no carregamento: no celular ele abre o teclado sobre o H1
 (decidido: brief §3, linha 28).
 
@@ -263,9 +337,14 @@ exceção no `qa/config.json`. É o `.footer-links` do site reduzido
   2. O WhatsApp da Zyphy → `https://wa.me/5511924507188`, sem texto pronto
      [F35]. O rótulo é o "rótulo do link do WhatsApp no rodapé (`copy.md` §13)";
      traz o número, então é copy, não microcopy do design.
-- **Por que o link da política aparece duas vezes:** o da placa é lido antes do
-  primeiro campo, junto do aviso de privacidade (brief §3, linha 18, mantido); o
-  do rodapé é onde a pessoa procura e onde o QA-14 confere. Nenhum dos dois sai.
+- **Por que o link da política aparece duas vezes:** o da placa fica junto do
+  aviso de privacidade (brief §3, linha 18, mantido) — no desktop, antes do
+  primeiro campo; no celular e no tablet, no fim da placa, depois das perguntas
+  (brief §3, linha 31). O do rodapé é onde a pessoa procura e onde o QA-14
+  confere. Nenhum dos dois sai. No celular os dois ficam próximos (o da placa é o
+  último item da faixa petróleo, o do rodapé é o primeiro da faixa 950 logo
+  abaixo); a troca de faixa separa os dois blocos, e tirar um deles desfaria uma
+  das duas decisões registradas.
 - **Elemento:** `<footer>` (landmark de rodapé), fora do `<main>`, com uma lista
   de dois links.
 - **Letra e cor:** Archivo 400, 15px (`--fs-small`); texto `--mist-400` sobre
@@ -277,8 +356,9 @@ exceção no `qa/config.json`. É o `.footer-links` do site reduzido
   links; `--space-5` entre o cartão e o rodapé; `--space-8` (64px) do rodapé à
   base da página. Fica longe do fluxo das perguntas: quem preenche não tropeça
   nele, e quem procura acha no lugar de sempre.
-- **Celular:** faixa de borda a borda em `--ink-950`, depois da coluna das
-  perguntas; padding lateral `--gutter`, `--space-5` em cima e `--space-7` (48px)
+- **Celular:** faixa de borda a borda em `--ink-950`, depois do fim da placa
+  (antes vinha logo depois das perguntas; a faixa do fim da placa entrou entre
+  as duas); padding lateral `--gutter`, `--space-5` em cima e `--space-7` (48px)
   embaixo, somado a `env(safe-area-inset-bottom)`. Um link por linha (como o site
   abaixo de 600px, `styles.css:376`).
 - **Comportamento:** não é fixo nem sticky (regra 6). Os dois links abrem em nova
@@ -400,6 +480,13 @@ no fim dela, antes do botão.
 
 ### Placa (coluna da esquerda)
 
+- **Duas partes no markup:** cabeçalho (marca, H1, subtítulo) e fim da placa
+  (Corpo, Quem lê, divisória, Tamanho, Privacidade, link). No desktop as duas
+  ficam juntas na coluna da esquerda, seguidas do progresso sticky, e a placa se
+  lê como sempre. Abaixo de 1100px viram duas faixas petróleo: o cabeçalho antes
+  das perguntas e o fim depois dos botões da etapa (ver Layout › Celular).
+- **Sem prova** (decidido: brief §3, linha 32): a placa não traz projetos nem
+  depoimentos.
 - Marca "Zyphy" como texto (o `.zy-logo` do site: Archivo 800, Z em ciano). Não é
   link: não há site para navegar aqui, e sair no meio do questionário é ruim.
 - Corpo e Quem lê em 17px; Tamanho e Privacidade em 15px, peso 500 na
@@ -414,7 +501,8 @@ no fim dela, antes do botão.
 
 Substitui a coluna das perguntas; as seis etapas ficam "feita". No bloco de
 progresso some a linha "Etapa {n} de {total}" (não há etapa atual) e ficam a
-contagem e o rascunho.
+contagem e o rascunho. No celular e no tablet, o fim da placa continua depois
+da tela final (depois da prévia), na mesma posição relativa das etapas.
 
 1. Título em Sofia: "O PDF da {empresa} está pronto." — `text-wrap: balance`
    (o nome da empresa pode ser longo).
@@ -674,8 +762,9 @@ Da identidade do site e do anti-brief:
 
 ## Decisões do Weslley (2026-10-01)
 
-Os seis pontos que estavam em aberto, todos decididos. Registro no
-`brief-questionario-v1.md` §3, linhas 22–29.
+Os seis pontos que estavam em aberto, todos decididos, e as três decisões
+tomadas depois da volta 2 do ciclo (7–9). Registro no
+`brief-questionario-v1.md` §3, linhas 22–32.
 
 | # | Ponto | Decisão | Onde está na direção |
 |---|---|---|---|
@@ -684,7 +773,29 @@ Os seis pontos que estavam em aberto, todos decididos. Registro no
 | 3 | Cor do papel do PDF | (a) **papel branco**; o modo escuro vale só para a página | PDF › Decisões |
 | 4 | "Outro" nas perguntas 9 e 19 | (b) **abre um campo curto**; rótulo no `copy.md` (`perguntas.md` linha 16 já atualizado) | Componentes › Campo do "Outro" |
 | 5 | og:image | (b) **só texto e marca**: placa petróleo, Z e o H1 em Sofia | Tratamento de imagem › og:image |
-| 6 | QA-14 e QA-13 | **sem exceção** no `qa/config.json` (ele só aceita exceção de IMP e REVIEW). QA-14: **rodapé mínimo** com o link da política e o WhatsApp da Zyphy [F35]. QA-13: fica como está; sem sitemap e sem JSON-LD numa página noindex, e o check desconta pontos | Layout › Rodapé |
+| 6 | QA-14 e QA-13 | QA-14: **rodapé mínimo** com o link da política e o WhatsApp da Zyphy [F35], sem exceção. QA-13: fica como está; sem sitemap e sem JSON-LD numa página noindex, e o check desconta pontos. O "sem exceções no `qa/config.json`" foi substituído pela decisão 9 (brief §3, linha 27) | Layout › Rodapé |
+| 7 | Ordem no celular (C2) | **etapas → H1 e subtítulo → perguntas → resto da placa** (privacidade, tamanho) depois das perguntas. Desktop não muda. Motivo: a pergunta 1 aparecia em y=1210 no celular (brief §3, linha 31) | Layout › Celular e Tablet; Ideia do hero; Componentes › Placa; Rodapé |
+| 8 | Prova na placa (C4) | **placa sem prova**: não traz projetos nem depoimentos (brief §3, linha 32). Não muda o layout | Componentes › Placa |
+| 9 | Exceções IMP | **ai-color-palette** ("ciano é a identidade herdada do zyphy-site, brief §3") e **all-caps-body** ("H1 em caixa alta da direção aprovada") no `qa/config.json`; domínio https://zyphy-questionario.vercel.app (brief §3, linha 30). Não muda o layout: paleta e H1 ficam como estão | Paleta; Tipografia › Escala |
+
+Como a direção leu a decisão 7 (escolhas registradas aqui, sem ok à parte):
+
+- **Marca "Zyphy":** fica no cabeçalho, acima do H1, em toda largura (é ela que
+  diz quem é a "gente" do "Conta pra gente"; uma linha).
+- **Progresso:** fica junto das etapas, logo abaixo delas, como já estava no
+  celular; não é "resto da placa".
+- **Corpo e Quem lê:** vão para o fim da placa (a decisão põe só H1 e subtítulo
+  antes das perguntas).
+- **Tamanho, Privacidade e o link da política:** no fim da placa, nessa ordem
+  (a do desktop), com o link logo abaixo da privacidade (`copy.md` §1).
+- **Fim da placa depois dos botões da etapa**, não entre a última pergunta e o
+  botão.
+- **Tablet segue a ordem do celular** (mesmo layout de uma coluna, mesmo
+  problema no print de 768×1024).
+- **Ordem no DOM igual à do celular;** no desktop, só o tab muda: o link da
+  política vem depois dos botões da etapa.
+- **Sai** o aviso de privacidade antes do primeiro campo no celular e no tablet
+  (regra 1: ver Layout › Celular, "O que saiu").
 
 Interpretações da direção, aprovadas (brief §3, linha 28):
 
@@ -698,4 +809,4 @@ cartão; progresso no fim da placa com sticky (desktop) e logo abaixo das etapas
 (celular); número da pergunta na tela igual ao do PDF; ajuda acima do campo; um
 único movimento; campo do "Outro" fora do {y}; link "Voltar e editar
 respostas" repetido no fim da prévia; rodapé abaixo do cartão no desktop e faixa
-de borda a borda no celular.
+de borda a borda no celular; cabeçalho da placa com 32px de padding no celular.

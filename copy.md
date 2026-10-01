@@ -26,6 +26,7 @@ Notas para quem aplica o texto:
 - **Tamanho:** 28 perguntas em 6 etapas. Dá pra parar e continuar depois, neste mesmo aparelho: o rascunho fica salvo no seu navegador [F34].
 - **Privacidade:** Suas respostas não saem deste navegador: o rascunho fica salvo aqui, a página não tem analytics, e o PDF só chega na Zyphy se você enviar [F34].
 - **Link (logo abaixo da privacidade):** Política de privacidade da Zyphy → https://www.zyphy.com.br/privacidade/
+  - **Texto para leitor de tela (logo após o texto visível, com o espaço inicial):** " (abre em nova aba)"
 - **Progresso:** Etapa {n} de {total} · {nome da etapa}
 - **Progresso das obrigatórias:** {x} de {y} obrigatórias respondidas
 
@@ -132,6 +133,7 @@ Notas para quem aplica o texto:
 - **P28 · longa · opcional:** Algo mais que a gente deveria saber?
 - **Confirmação (caixa obrigatória):** Confirmo que as informações acima são verdadeiras e podem ser usadas no site.
 - **CTA:** Gerar o PDF
+- **CTA enquanto o PDF é gerado:** Gerando o PDF…
 - **Secundário:** Voltar
 
 ## 9. Tela final
@@ -166,6 +168,7 @@ Notas para quem aplica o texto:
 - **Confirmação:** Confirmado por {nome}: as informações acima são verdadeiras e podem ser usadas no site.
 - **Rodapé:** Página {x} de {y}
 - **Nome do arquivo:** zyphy-questionario-{empresa}-{aaaa-mm-dd}.pdf
+- **Título nos metadados do PDF:** Zyphy · Questionário do site · {empresa}
 
 ## 12. Avisos e erros
 
@@ -187,6 +190,7 @@ Notas para quem aplica o texto:
 - **Link 1:** Política de privacidade da Zyphy → https://www.zyphy.com.br/privacidade/
 - **Link 2:** WhatsApp da Zyphy: +55 11 92450-7188 [F35]
 - **Destino do link 2:** https://wa.me/5511924507188, sem texto pronto [F35].
+- **Texto para leitor de tela (links 1 e 2, logo após o texto visível, com o espaço inicial):** " (abre em nova aba)"
 - **Texto acessível do link 2:** sem aria-label; o texto visível já diz o canal, de quem é e o número. O aviso de nova aba é o mesmo do link da política.
 
 ## SEO
@@ -196,3 +200,4 @@ Notas para quem aplica o texto:
 - **Meta description:** Seis etapas sobre o seu negócio. No fim, você baixa o PDF e envia pra Zyphy pelo WhatsApp.
 - **og:title:** Questionário do seu site · Zyphy
 - **og:description:** Seis etapas sobre o seu negócio. No fim, um PDF pra enviar a quem vai programar o seu site [F13].
+- **og:image:alt:** Placa verde-petróleo com o Z da Zyphy e o título: Conta pra gente sobre o seu negócio. Quem lê é quem vai programar o seu site [F13].

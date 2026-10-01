@@ -24,6 +24,9 @@ HTML/CSS/JS vanilla. Biblioteca de PDF hospedada no próprio site (sem CDN de te
 - PDF em papel branco (o modo escuro vale só para a página).
 - "Outro" nas perguntas 9 e 19 abre um campo curto; rótulo definido no copy.md.
 - og:image: imagem só com texto e marca (placa petróleo, Z e o H1 em Sofia).
-- Rodapé mínimo com o link da política de privacidade e o WhatsApp da Zyphy (F35). Sem exceções no qa/config.json; QA-13 (sitemap e JSON-LD) fica como está e desconta pontos por causa do noindex.
+- Rodapé mínimo com o link da política de privacidade e o WhatsApp da Zyphy (F35). Sem exceções no qa/config.json (substituído em 2026-10-01: ver exceções IMP abaixo); QA-13 (sitemap e JSON-LD) fica como está e desconta pontos por causa do noindex.
 - Aprovadas as interpretações da direção: progresso conta só as 11 obrigatórias (a caixa de confirmação fica fora); a pessoa pode pular para qualquer etapa pelo topo; sem autofocus ao carregar; link da política abre em nova aba.
 - Direção (direcao.md) aprovada pelo Weslley.
+- Exceções IMP no qa/config.json (2026-10-01): ai-color-palette ("ciano é a identidade herdada do zyphy-site, brief §3") e all-caps-body ("H1 em caixa alta da direção aprovada"). Domínio no qa/config.json: https://zyphy-questionario.vercel.app.
+- Ordem no celular (2026-10-01): etapas → H1 e subtítulo → perguntas → resto da placa (privacidade, tamanho) depois das perguntas. Desktop não muda. Motivo: C2, a primeira pergunta aparecia em y=1210 no celular.
+- Placa sem prova (C4, 2026-10-01): a placa não traz projetos nem depoimentos.

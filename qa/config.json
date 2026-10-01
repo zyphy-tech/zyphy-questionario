@@ -1,1 +1,17 @@
-{ "nota_minima": 80, "dominio": "", "paginas_ignoradas": [], "excecoes": [] }
+{
+  "nota_minima": 80,
+  "dominio": "https://zyphy-questionario.vercel.app",
+  "paginas_ignoradas": [],
+  "excecoes": [
+    {
+      "check": "IMP",
+      "regra": "ai-color-palette",
+      "motivo": "ciano é a identidade herdada do zyphy-site, brief §3"
+    },
+    {
+      "check": "IMP",
+      "regra": "all-caps-body",
+      "motivo": "H1 em caixa alta da direção aprovada"
+    }
+  ]
+}
