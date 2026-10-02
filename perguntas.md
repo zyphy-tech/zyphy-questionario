@@ -13,7 +13,7 @@ Formato: número · pergunta · tipo · obrigatória · ajuda (texto pequeno aba
 
 ## 2. Quem visita o site
 8 · Quem é o seu cliente ideal? · longa · sim
-9 · O que você quer que o visitante faça no site? · escolha única: chamar no WhatsApp / pedir orçamento / comprar / agendar / ligar / outro · sim
+9 · O que você quer que o visitante faça no site? · escolha única: chamar no WhatsApp / pedir orçamento / comprar / agendar / ligar / outro (abre campo curto) · sim
 10 · Que dúvidas os clientes costumam ter antes de fechar? · longa · não
 
 ## 3. Provas e números
@@ -27,7 +27,7 @@ Formato: número · pergunta · tipo · obrigatória · ajuda (texto pequeno aba
 16 · E-mail para o site · curta · não
 17 · Redes sociais · longa · não · Links.
 18 · Horário de atendimento · curta · não
-19 · Em quanto tempo vocês costumam responder uma mensagem? · escolha única: na hora / no mesmo dia / em até 24h / outro · não
+19 · Em quanto tempo vocês costumam responder uma mensagem? · escolha única: na hora / no mesmo dia / em até 24h / outro (abre campo curto) · não
 20 · Endereço físico para aparecer no site · curta · não · Deixe em branco se não quiser.
 
 ## 5. Gosto e identidade

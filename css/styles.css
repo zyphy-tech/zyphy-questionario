@@ -1,0 +1,217 @@
+/* ==========================================================================
+   Questionário do site (Zyphy) — componentes. Todo valor de cor, fonte,
+   tamanho, espaço, raio e duração vem de css/tokens.css (materializado do
+   DESIGN.md). Aqui só composição. Especificação: direcao.md (aprovada).
+   Pontos de quebra: < 600 celular · 600–1099 tablet · ≥ 1100 desktop.
+   ========================================================================== */
+
+/* ---------- Base ---------- */
+[hidden]{display:none !important}
+html{scrollbar-gutter:stable;scrollbar-color:var(--step-idle) var(--page)}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--font-body);font-size:var(--fs-body);font-weight:var(--weight-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a,button,input,textarea,label{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:var(--focus-width) solid var(--focus-ring);outline-offset:var(--focus-offset)}
+::selection{background:var(--selection-bg);color:var(--selection-text)}
+input,textarea,button{font-family:var(--font-body);font-size:var(--fs-body)}
+input,textarea{caret-color:var(--accent)}
+::placeholder{color:var(--text-muted);opacity:1}
+p{max-width:var(--measure)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- Página e cartão ---------- */
+.page{display:block;padding-top:var(--space-8)}
+/* celular e tablet: a ordem do markup (etapas → progresso → cabeçalho da
+   placa → perguntas → fim da placa) é a ordem da tela */
+.card{box-sizing:border-box;width:min(var(--card-max),100% - 2 * var(--gutter));margin-inline:auto;background:var(--surface);border-radius:var(--r-screen);display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"steps" "progress" "plate-head" "sheet" "plate-end"}
+
+/* ---------- Etapas no topo ---------- */
+.steps{--steps-pad:var(--card-pad);--steps-gap:var(--space-3);grid-area:steps;position:relative;padding:var(--space-5) var(--steps-pad) 0;border-bottom:var(--hairline) solid var(--line)}
+.steps-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 var(--steps-gap)}
+.step{--bar:var(--step-idle);--bar-style:solid;position:relative;box-sizing:border-box;width:100%;min-height:var(--tap);display:flex;flex-wrap:wrap;align-items:baseline;gap:0 var(--space-2);padding:var(--space-3) 0 var(--space-4);margin:0;background:none;border:0;border-top:var(--step-bar) var(--bar-style) var(--bar);color:var(--text-muted);text-align:left;cursor:pointer;transition:color var(--dur-fast) ease}
+.step-num{font-family:var(--font-display);font-weight:var(--weight-display);font-size:var(--fs-h3);line-height:var(--lh-display);font-variant-numeric:var(--numeric-data)}
+.step-label{font-size:var(--fs-small);font-weight:var(--weight-medium);line-height:var(--lh-heading)}
+.step[aria-current="step"],.step[data-state="done"],.step[data-state="missing"]{color:var(--text)}
+.step[data-state="done"]{--bar:var(--step-done)}
+.step[data-state="missing"]{--bar:var(--step-missing);--bar-style:dashed}
+@media (hover:hover) and (pointer:fine){ .step:hover{color:var(--text)} }
+/* a barra ciana da etapa atual: um elemento só, que desliza (direcao.md ›
+   Movimento, item 1). Largura de uma coluna; o deslocamento é o índice
+   vezes (coluna + vão), lido do --step-index que o JS põe nele mesmo */
+.steps-indicator{position:absolute;top:var(--space-5);left:var(--steps-pad);width:calc((100% - 2 * var(--steps-pad) - 5 * var(--steps-gap)) / 6);height:var(--step-bar);background:var(--step-current);transform:translateX(calc(var(--step-index,0) * (100% + var(--steps-gap))));pointer-events:none}
+.steps.is-ready .steps-indicator{transition:transform var(--dur-step) var(--ease-out)}
+@media (prefers-reduced-motion:reduce){ .steps.is-ready .steps-indicator{transition:none} }
+
+/* ---------- Placa: cabeçalho e fim (coluna da esquerda no desktop) ---------- */
+/* o H1 mede pela largura do cabeçalho (13cqi) */
+.plate-head{grid-area:plate-head;container-type:inline-size;background:var(--plate);color:var(--text-on-plate);padding:var(--card-pad)}
+/* tablet: última faixa dentro do cartão, leva o raio dos dois cantos de baixo */
+.plate-end{grid-area:plate-end;background:var(--plate);color:var(--text-on-plate);padding:var(--card-pad);border-radius:var(--r-none) var(--r-none) var(--r-screen) var(--r-screen)}
+.plate-end > :first-child{margin-top:0}
+.brand{margin:0;font-weight:var(--weight-display);font-size:var(--fs-lead);line-height:var(--lh-heading)}
+.zy-logo-z{color:var(--accent)}
+.plate-h1{margin:var(--space-6) 0 0;font-family:var(--font-display);font-weight:var(--weight-display);font-size:var(--fs-h1);line-height:var(--lh-h1);letter-spacing:var(--tracking-display);text-transform:var(--case-display)}
+.plate-h1 .line{display:block;text-wrap:balance}
+.plate-lead{margin:var(--space-5) 0 0;font-size:var(--fs-lead);line-height:var(--lh-lead);text-wrap:pretty}
+.plate-text{margin:var(--space-4) 0 0;text-wrap:pretty}
+.plate-rule{margin:var(--space-6) 0;border:0;border-top:var(--hairline) solid var(--line)}
+.plate-note{margin:var(--space-3) 0 0;font-size:var(--fs-small);line-height:var(--lh-small);text-wrap:pretty}
+.plate-rule + .plate-note{margin-top:0}
+.plate-note--privacy{font-weight:var(--weight-medium)}
+.plate-link{display:inline-flex;align-items:center;min-height:var(--tap);color:var(--text-on-plate);text-decoration:underline;text-underline-offset:var(--underline-offset)}
+
+/* bloco de progresso: legenda das etapas no celular e no tablet; fim da
+   placa, grudado no topo, no desktop */
+.progress{grid-area:progress;padding:var(--space-4) var(--card-pad);font-size:var(--fs-small);line-height:var(--lh-small);border-bottom:var(--hairline) solid var(--line)}
+.progress p{margin:0}
+.progress-step{font-weight:var(--weight-medium)}
+.progress-count,.progress-draft{font-variant-numeric:var(--numeric-data)}
+
+/* ---------- Perguntas (coluna da direita) ---------- */
+.sheet{grid-area:sheet;min-width:0;padding:var(--card-pad)}
+.sheet-form,.final{max-width:var(--measure-sheet)}
+.notice{margin:0 0 var(--space-6);padding-bottom:var(--space-5);border-bottom:var(--hairline) solid var(--line);font-weight:var(--weight-medium);color:var(--text)}
+.notice--end{margin:var(--space-7) 0 0;padding:var(--space-5) 0 0;border-bottom:0;border-top:var(--hairline) solid var(--line)}
+.step-title{margin:0;font-family:var(--font-display);font-weight:var(--weight-display);font-size:var(--fs-title);line-height:var(--lh-display);letter-spacing:var(--tracking-display);text-transform:var(--case-display);text-wrap:balance}
+.step-title:focus{outline:none}
+.step-sub{margin:var(--space-3) 0 0;text-wrap:pretty}
+
+/* pergunta: número + enunciado + "obrigatória" → ajuda → campo → erro */
+.q{margin:var(--space-7) 0 0;padding:0;border:0;min-width:0}
+.q-label{display:block;width:100%;padding:0;font-size:var(--fs-body);font-weight:var(--weight-strong);line-height:var(--lh-heading);text-wrap:pretty}
+.q-num{font-weight:var(--weight-medium);color:var(--text-muted);font-variant-numeric:var(--numeric-data)}
+.q-req{margin-left:var(--space-1);font-size:var(--fs-small);font-weight:var(--weight-medium);color:var(--text-muted)}
+.q-help{margin:var(--space-1) 0 0;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--text-muted)}
+.q-error{margin:var(--space-2) 0 0;font-size:var(--fs-small);font-weight:var(--weight-medium);line-height:var(--lh-small);color:var(--error)}
+
+.field{display:block;box-sizing:border-box;width:100%;min-height:var(--control-h);margin-top:var(--space-2);padding:var(--space-3) var(--space-4);color:var(--text);background:var(--surface-field);border:var(--hairline) solid var(--line-control);border-radius:var(--r-control);line-height:var(--lh-heading);transition:border-color var(--dur-fast) ease}
+.field:focus-visible{border-color:var(--focus-ring)}
+.field--long{min-height:var(--textarea-min-h);line-height:var(--lh-body);resize:vertical;field-sizing:content}
+.field--year{max-width:var(--field-year)}
+.field--phone{max-width:var(--field-phone)}
+.field[aria-invalid="true"],.field[aria-invalid="true"]:focus-visible{border-color:var(--error);box-shadow:0 0 0 var(--ring) var(--error-ring)}
+
+/* escolha única: cada opção é uma linha clicável inteira */
+.options{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-2);margin-top:var(--space-2)}
+.option{display:flex;align-items:center;gap:var(--space-3);box-sizing:border-box;min-height:var(--control-h);padding:var(--space-2) var(--space-4);background:var(--surface-field);border:var(--hairline) solid var(--line-control);border-radius:var(--r-control);cursor:pointer;line-height:var(--lh-heading);transition:border-color var(--dur-fast) ease}
+.option:has(:checked){border-color:var(--text)}
+.option:has(:focus-visible){outline:var(--focus-width) solid var(--focus-ring);outline-offset:var(--focus-offset)}
+.option input{appearance:none;-webkit-appearance:none;flex:none;box-sizing:border-box;width:var(--mark-size);height:var(--mark-size);margin:0;border:var(--mark-border) solid var(--mark-idle);border-radius:50%;background:transparent;cursor:pointer}
+.option input:focus-visible{outline:none}
+.option input:checked{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 var(--mark-dot-gap) var(--surface-field)}
+.q--choice[data-invalid] .option{border-color:var(--error)}
+.q--choice .q-help + .options{margin-top:var(--space-2)}
+
+/* campo do "Outro": abaixo da grade inteira, dentro do mesmo fieldset */
+.other{margin-top:var(--space-2)}
+.other-label{display:block;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--text-muted)}
+
+/* caixa de confirmação: bloco próprio no fim da etapa 6 */
+.confirm{margin-top:var(--space-7);padding-top:var(--space-6);border-top:var(--hairline) solid var(--line)}
+.confirm-label{display:flex;align-items:flex-start;gap:var(--space-3);cursor:pointer;font-weight:var(--weight-medium);line-height:var(--lh-heading)}
+.confirm-box{position:relative;flex:none;width:var(--check-size);height:var(--check-size)}
+.confirm-input{appearance:none;-webkit-appearance:none;display:block;box-sizing:border-box;width:var(--check-size);height:var(--check-size);margin:0;border:var(--mark-border) solid var(--mark-idle);border-radius:var(--r-control);background:transparent;cursor:pointer}
+.confirm-input:checked{border-color:var(--accent);background:var(--accent)}
+.confirm-input[aria-invalid="true"]{border-color:var(--error);box-shadow:0 0 0 var(--ring) var(--error-ring)}
+.confirm-check{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--on-accent);stroke-width:var(--mark-border);stroke-linecap:round;stroke-linejoin:round;pointer-events:none;display:none}
+.confirm-input:checked + .confirm-check{display:block}
+
+/* ---------- Ações da etapa ---------- */
+.step-actions{margin-top:var(--space-7)}
+.step-summary{margin:0 0 var(--space-4);font-size:var(--fs-small);font-weight:var(--weight-medium);color:var(--error)}
+.step-summary:empty{display:none}
+.btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:var(--control-h);padding:var(--space-3) var(--space-5);margin:0;border-radius:var(--r-control);font-weight:var(--weight-strong);line-height:var(--lh-heading);cursor:pointer;transition:background-color var(--dur-fast) ease,border-color var(--dur-fast) ease}
+.btn--primary{background:var(--accent);color:var(--on-accent);border:var(--hairline) solid var(--accent)}
+.btn--ghost{background:transparent;color:var(--text);border:var(--hairline) solid var(--text-muted)}
+@media (hover:hover) and (pointer:fine){
+  .btn--primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+  .btn--ghost:hover{border-color:var(--text)}
+}
+/* texto de espera no mesmo lugar: os dois rótulos ocupam a mesma célula,
+   então a largura do botão é a do maior e não muda na troca */
+.btn--swap{display:inline-grid}
+.btn--swap .btn-label{grid-area:1 / 1;text-align:center}
+.btn--swap .btn-label--busy{visibility:hidden}
+.btn--swap[aria-busy="true"] .btn-label{visibility:hidden}
+.btn--swap[aria-busy="true"] .btn-label--busy{visibility:visible}
+.btn[aria-disabled="true"]{cursor:progress}
+.link-btn{display:inline-flex;align-items:center;min-height:var(--tap);padding:0;margin:0;background:none;border:0;color:var(--text-muted);font-weight:var(--weight-body);text-decoration:underline;text-underline-offset:var(--underline-offset);cursor:pointer;transition:color var(--dur-fast) ease}
+@media (hover:hover) and (pointer:fine){ .link-btn:hover{color:var(--text)} }
+
+/* ---------- Tela final ---------- */
+.final-title{max-width:none}
+.final-body{margin:var(--space-4) 0 0;text-wrap:pretty}
+.final-actions{margin-top:var(--space-6)}
+.final-status{margin:var(--space-4) 0 0;font-size:var(--fs-small);font-weight:var(--weight-medium);line-height:var(--lh-small)}
+.final-status:empty{display:none}
+.final-edit{margin:var(--space-3) 0 0}
+.final-notes{margin-top:var(--space-5);padding-top:var(--space-5);border-top:var(--hairline) solid var(--line)}
+.final-note{margin:var(--space-3) 0 0;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--text-muted)}
+.final-note:first-child{margin-top:0}
+
+/* prévia: estrutura do PDF, no escuro, sem caixa */
+.preview{margin-top:var(--space-7);padding-top:var(--space-6);border-top:var(--hairline) solid var(--line)}
+.preview-head{margin:0;font-size:var(--fs-small);font-weight:var(--weight-strong);line-height:var(--lh-small);color:var(--text-muted)}
+.preview-spec{margin:var(--space-4) 0 0;display:grid;gap:var(--space-2)}
+.preview-spec-row{display:grid;grid-template-columns:minmax(0,var(--spec-label)) minmax(0,1fr);gap:var(--space-4);align-items:baseline}
+.preview-spec dt{font-size:var(--fs-small);color:var(--text-muted)}
+.preview-spec dd{margin:0;overflow-wrap:anywhere}
+.preview-section-title{margin:var(--space-7) 0 var(--space-3);font-family:var(--font-display);font-weight:var(--weight-display);font-size:var(--fs-h3);line-height:var(--lh-display);text-transform:var(--case-display)}
+.preview-list{list-style:none;margin:0;padding:0}
+.preview-item + .preview-item{margin-top:var(--space-5)}
+.pv-q{display:grid;grid-template-columns:var(--pv-indent) minmax(0,1fr);margin:0;max-width:none;font-weight:var(--weight-strong);line-height:var(--lh-heading)}
+.pv-num{font-variant-numeric:var(--numeric-data)}
+.pv-a{margin:var(--space-1) 0 0 var(--pv-indent);max-width:none;white-space:pre-wrap;overflow-wrap:anywhere}
+.pv-a--empty{color:var(--text-muted)}
+.preview-confirm{margin:var(--space-7) 0 0;padding-top:var(--space-5);border-top:var(--hairline) solid var(--line);font-size:var(--fs-small);font-weight:var(--weight-medium);line-height:var(--lh-small)}
+
+/* ---------- Rodapé ---------- */
+.site-footer{box-sizing:border-box;width:min(var(--card-max),100% - 2 * var(--gutter));margin:var(--space-5) auto 0;padding-bottom:var(--space-8)}
+.footer-links{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:0 var(--space-5);font-size:var(--fs-small)}
+.footer-links a{display:inline-flex;align-items:center;min-height:var(--tap);color:var(--text-muted);text-decoration:underline;text-underline-offset:var(--underline-offset);transition:color var(--dur-fast) ease}
+.footer-links a:hover,.footer-links a:focus-visible{color:var(--text)}
+
+/* ---------- Celular (< 600px): borda a borda ---------- */
+@media (max-width:599px){
+  .page{padding-top:0}
+  .card{width:100%;border-radius:var(--r-none);background:transparent}
+  .steps{--steps-pad:var(--gutter);--steps-gap:var(--space-2);padding-top:var(--space-4);background:var(--page)}
+  .steps-indicator{top:var(--space-4)}
+  .step{justify-content:center;padding-top:var(--space-3)}
+  .step-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .progress{padding-inline:var(--gutter);background:var(--page)}
+  /* cabeçalho mais curto (32px): é a folga que põe o P1 na primeira tela */
+  .plate-head{padding:var(--space-6) var(--gutter)}
+  .plate-end{padding:var(--space-7) var(--gutter);border-radius:var(--r-none)}
+  .sheet{background:var(--surface);padding:var(--space-7) var(--gutter)}
+  .btn-row{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
+  .site-footer{width:100%;margin:0;padding:var(--space-5) var(--gutter) calc(var(--space-7) + env(safe-area-inset-bottom));background:var(--page)}
+  .footer-links{flex-direction:column}
+  .preview-spec-row{grid-template-columns:minmax(0,1fr);gap:0}
+}
+
+/* ---------- Tablet (600–1099px): uma coluna, cartão de 760px ---------- */
+@media (min-width:600px){
+  .options--grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:600px) and (max-width:1099px){
+  .card,.site-footer{width:min(var(--form-max),100% - 2 * var(--gutter))}
+  /* rótulo pode quebrar em duas linhas: número em cima, rótulo embaixo, igual nas seis */
+  .step{flex-direction:column;align-items:flex-start;gap:var(--space-1)}
+}
+
+/* ---------- Desktop (≥ 1100px): etapas no topo, placa 5/12 + perguntas 7/12 ---------- */
+@media (min-width:1100px){
+  /* coluna da esquerda: cabeçalho → fim da placa → progresso. A última
+     linha (1fr) cresce até a altura das perguntas; o progresso grudado anda
+     dentro dela. O cartão não usa overflow:hidden, senão o sticky para */
+  .card{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto auto auto 1fr;grid-template-areas:"steps steps" "plate-head sheet" "plate-end sheet" "progress sheet"}
+  /* o petróleo da coluna inteira, numa superfície só: as três partes ficam
+     por cima, sem emenda entre elas */
+  .card::before{content:"";grid-column:1;grid-row:2 / -1;background:var(--plate);border-bottom-left-radius:var(--r-screen)}
+  .plate-head{padding-bottom:0}
+  .plate-end{padding:var(--space-6) var(--card-pad) 0;border-radius:var(--r-none)}
+  .progress{align-self:start;position:sticky;top:var(--sticky-top);margin:var(--space-6) var(--card-pad) var(--card-pad);padding:var(--space-5) 0 0;background:var(--plate);color:var(--text-on-plate);border-bottom:0;border-top:var(--hairline) solid var(--line)}
+}
