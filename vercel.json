@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/", "destination": "/questionario/", "permanent": false },
+    { "source": "/questionario", "destination": "/questionario/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
