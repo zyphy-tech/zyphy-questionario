@@ -1,12 +1,8 @@
 # Lista branca: ignora tudo e libera só o que a página carrega (regra 9).
-# Conferido contra index.html, css/, js/ (inclusive o que o js/pdf.js busca
-# no clique) em 2026-10-01. Arquivo novo que a página passe a usar precisa
-# entrar aqui.
+# A página vive em questionario/ (servida em www.zyphy.com.br/questionario/
+# pelo rewrite do zyphy-site). Conferido contra questionario/index.html, css/,
+# js/ (inclusive o que o js/pdf.js busca no clique) em 2026-10-05. Arquivo
+# novo que a página passe a usar precisa ficar dentro de questionario/.
 /*
-!/index.html
-!/favicon.ico
+!/questionario
 !/vercel.json
-!/css
-!/js
-!/assets
-!/vendor
