@@ -1,6 +1,6 @@
 {
   "redirects": [
-    { "source": "/", "destination": "/questionario/", "permanent": false },
+    { "source": "/", "destination": "https://www.zyphy.com.br/questionario/", "permanent": false },
     { "source": "/questionario", "destination": "/questionario/", "permanent": false }
   ],
   "headers": [

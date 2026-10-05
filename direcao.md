@@ -776,7 +776,7 @@ tomadas depois da volta 2 do ciclo (7–9). Registro no
 | 6 | QA-14 e QA-13 | QA-14: **rodapé mínimo** com o link da política e o WhatsApp da Zyphy [F35], sem exceção. QA-13: fica como está; sem sitemap e sem JSON-LD numa página noindex, e o check desconta pontos. O "sem exceções no `qa/config.json`" foi substituído pela decisão 9 (brief §3, linha 27) | Layout › Rodapé |
 | 7 | Ordem no celular (C2) | **etapas → H1 e subtítulo → perguntas → resto da placa** (privacidade, tamanho) depois das perguntas. Desktop não muda. Motivo: a pergunta 1 aparecia em y=1210 no celular (brief §3, linha 31) | Layout › Celular e Tablet; Ideia do hero; Componentes › Placa; Rodapé |
 | 8 | Prova na placa (C4) | **placa sem prova**: não traz projetos nem depoimentos (brief §3, linha 32). Não muda o layout | Componentes › Placa |
-| 9 | Exceções IMP | **ai-color-palette** ("ciano é a identidade herdada do zyphy-site, brief §3") e **all-caps-body** ("H1 em caixa alta da direção aprovada") no `qa/config.json`; domínio https://zyphy-questionario.vercel.app (brief §3, linha 30). Não muda o layout: paleta e H1 ficam como estão | Paleta; Tipografia › Escala |
+| 9 | Exceções IMP | **ai-color-palette** ("ciano é a identidade herdada do zyphy-site, brief §3") e **all-caps-body** ("H1 em caixa alta da direção aprovada") no `qa/config.json`; domínio https://www.zyphy.com.br, página em /questionario/ (brief §3, linha 30). Não muda o layout: paleta e H1 ficam como estão | Paleta; Tipografia › Escala |
 
 Como a direção leu a decisão 7 (escolhas registradas aqui, sem ok à parte):
 
