@@ -24,7 +24,7 @@ Notas para quem aplica o texto:
 - **Corpo:** A Zyphy faz sites, apps e dashboards [F10]. O que você responder aqui é a base do texto do seu site.
 - **Quem lê:** Quem conversa com você é quem programa o projeto [F13].
 - **Tamanho:** 28 perguntas em 6 etapas. Dá pra parar e continuar depois, neste mesmo aparelho: o rascunho fica salvo no seu navegador [F34].
-- **Privacidade:** Suas respostas não saem deste navegador: o rascunho fica salvo aqui, a página não tem analytics, e o PDF só chega na Zyphy se você enviar [F34].
+- **Privacidade:** Suas respostas não saem deste navegador: o rascunho fica salvo aqui até você enviar o PDF, a página não tem analytics, e o PDF só chega na Zyphy se você enviar [F34].
 - **Link (logo abaixo da privacidade):** Política de privacidade da Zyphy → https://www.zyphy.com.br/privacidade/
   - **Texto para leitor de tela (logo após o texto visível, com o espaço inicial):** " (abre em nova aba)"
 - **Progresso:** Etapa {n} de {total} · {nome da etapa}
@@ -144,6 +144,9 @@ Notas para quem aplica o texto:
 - **Destino do CTA:** WhatsApp da Zyphy, +55 11 92450-7188 [F35].
 - **Secundário:** Baixar
 - **Link:** Voltar e editar respostas
+- **Link 2 (microcopy criado pelo design, 20/10/2026):** Apagar minhas respostas deste navegador
+  - **Confirmação:** As respostas salvas neste navegador vão ser apagadas. O PDF que você já baixou ou enviou não muda.
+  - **Depois de apagar (também depois de enviar o PDF):** Rascunho apagado deste navegador.
 - **Depois de enviar:** A gente responde no mesmo dia, inclusive fim de semana e à noite [F1].
 - **Se não fechar:** Se o projeto não fechar, os dados que você enviar são apagados 12 meses depois do último contato [F32].
 - **Microcopy (fallback sem compartilhamento):** O PDF foi baixado. Na conversa com a Zyphy que abriu no WhatsApp, toque no clipe e anexe o arquivo {nome do arquivo}.
