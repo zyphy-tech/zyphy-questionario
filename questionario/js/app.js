@@ -1,7 +1,8 @@
 /* ==========================================================================
    Questionário do site (Zyphy) — etapas, validação, rascunho, tela final.
    Nada sai do navegador: sem fetch de respostas, sem analytics. O rascunho
-   fica no localStorage; o PDF é montado aqui (js/pdf.js, carregado só no
+   fica no localStorage até o envio do PDF (ou o link "Apagar minhas
+   respostas deste navegador"); o PDF é montado aqui (js/pdf.js, carregado só no
    clique em "Gerar o PDF", com pdf-lib + fontkit do próprio site).
    Textos: copy.md (aprovado). O microcopy criado pelo design está marcado.
    ========================================================================== */
@@ -28,6 +29,9 @@
     pdfError: 'Não deu pra gerar o PDF. Tente de novo: suas respostas continuam neste navegador.',
     fallback: function (file) { return 'O PDF foi baixado. Na conversa com a Zyphy que abriu no WhatsApp, toque no clipe e anexe o arquivo ' + file + '.'; },
     saved: function (file) { return 'PDF salvo em Downloads como ' + file + '.'; },
+    // apagar rascunho: microcopy criado pelo design (20/10/2026)
+    draftCleared: 'Rascunho apagado deste navegador.',
+    clearConfirm: 'As respostas salvas neste navegador vão ser apagadas. O PDF que você já baixou ou enviou não muda.',
     shareTitle: function (c) { return 'Questionário — ' + c; },
     shareText: function (c) { return 'Oi, Zyphy. Aqui está o questionário da ' + c + ' em PDF.'; },
     waText: function (c) { return 'Oi, Zyphy. Respondi o questionário da ' + c + '. O PDF baixou aqui e vou anexar nesta conversa.'; },
@@ -341,6 +345,14 @@
     window.clearTimeout(saveTimer);
     saveTimer = window.setTimeout(save, delay === undefined ? SAVE_DELAY : delay);
   }
+  // Apaga o rascunho deste navegador. As respostas continuam na página até
+  // ela ser fechada; se a pessoa editar de novo, o rascunho volta a ser salvo.
+  function clearDraft() {
+    window.clearTimeout(saveTimer);
+    try { window.localStorage.removeItem(STORAGE_KEY); } catch (e) { /* sem armazenamento: nada a apagar */ }
+    progressDraft.hidden = true;
+    noticeRecovered.hidden = true;
+  }
   function restore() {
     var raw;
     try { raw = window.localStorage.getItem(STORAGE_KEY); } catch (e) { return false; }
@@ -540,7 +552,8 @@
   function fallbackSend() {
     download();
     openWhatsApp();
-    statusEl.textContent = MSG.fallback(pdf.fileName);
+    clearDraft();
+    statusEl.textContent = MSG.fallback(pdf.fileName) + ' ' + MSG.draftCleared;
   }
   function send() {
     if (!pdf) return;
@@ -548,11 +561,18 @@
     try { file = new File([pdf.blob], pdf.fileName, { type: 'application/pdf' }); } catch (e) { file = null; }
     var touch = window.matchMedia('(pointer: coarse)').matches;
     if (file && touch && navigator.canShare && navigator.canShare({ files: [file] })) {
+      // compartilhou: apaga o rascunho; cancelou: não apaga nada
       navigator.share({ files: [file], title: MSG.shareTitle(pdf.company), text: MSG.shareText(pdf.company) })
+        .then(function () { clearDraft(); statusEl.textContent = MSG.draftCleared; })
         .catch(function (err) { if (!err || err.name !== 'AbortError') fallbackSend(); });
       return;
     }
     fallbackSend();
+  }
+  function clearByUser() {
+    if (!window.confirm(MSG.clearConfirm)) return;
+    clearDraft();
+    statusEl.textContent = MSG.draftCleared;
   }
 
   /* ---------- Eventos ---------- */
@@ -609,6 +629,7 @@
     else if (action === 'edit') go(TOTAL);
     else if (action === 'download' && pdf) { download(); statusEl.textContent = MSG.saved(pdf.fileName); }
     else if (action === 'send') send();
+    else if (action === 'clear-draft') clearByUser();
   });
   form.addEventListener('submit', function (e) { e.preventDefault(); });
 
